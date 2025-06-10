@@ -1,0 +1,64 @@
+# CodeMCP configuration for FastAPI + Celery project
+project_prompt = """
+This is a FastAPI project with Celery background tasks for word processing and map-reduce operations.
+
+Project Structure:
+- FastAPI app in backend/app/ with main.py as entry point
+- API v1 endpoints in backend/app/api/v1/ (words, auth, root)
+- Celery tasks in backend/app/tasks/ (words processing, debug, states)
+- Controllers in backend/app/controllers/ (business logic)
+- Models in backend/app/api/v1/models/ (Pydantic models)
+- Tests in backend/tests/ with comprehensive fixtures
+- Docker setup with PostgreSQL, Redis, and Celery worker
+
+Key Areas:
+- Authentication: backend/app/api/v1/auth/
+- Words processing: backend/app/api/v1/words/ and backend/app/tasks/words.py
+- Task management: backend/app/controllers/tasks.py and backend/app/api/
+- Configuration: backend/app/config.py
+- Main app: backend/app/main.py and backend/app/celery_app.py
+
+When making changes:
+1. Run tests: ./test.sh (uses Docker containers)
+2. Check code quality with pre-commit hooks
+3. Use Docker for development: ./up.sh and ./run.sh
+4. Database migrations: ./alembic.sh
+5. Consider impact on Celery workers and Redis
+6. Test API endpoints with smoke tests: ./smoke_test.sh
+7. Follow FastAPI and Celery best practices
+"""
+
+[commands]
+# Development workflow using existing scripts
+start_dev = ["./up.sh"]
+start_api = ["./run.sh"]
+stop_dev = ["./stop.sh"]
+
+# Testing using existing comprehensive test setup
+test = ["./test.sh"]
+test_docker = ["./test_docker.sh"]
+smoke_test = ["./smoke_test.sh"]
+
+# Database operations
+db_migrate = ["./alembic.sh"]
+db_connect = ["./psql.sh"]
+db_local = ["./local-psql.sh"]
+
+# Docker operations
+docker_up = ["./up.sh"]
+docker_build = ["./build.sh"]
+docker_compose = ["./compose.sh"]
+docker_exec = ["./exec.sh"]
+
+# Code quality (uses existing pre-commit setup)
+lint = ["pre-commit", "run", "--all-files"]
+format = ["pre-commit", "run", "--all-files"]
+
+# Project management
+activate_env = ["./activate.sh"]
+version_update = ["./verup.sh"]
+
+# Custom commands for FastAPI + Celery
+check_containers = ["docker", "ps"]
+view_logs = ["docker", "compose", "logs", "-f"]
+celery_status = ["docker", "compose", "exec", "celeryworker", "celery", "status"]

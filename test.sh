@@ -3,7 +3,7 @@
 #
 # do not forget `. ./activate.sh` before running this script,
 # add `127.0.0.1   postgres` into ` /etc/hosts`
-# run `docker-compose up -d postgres`
+# run `docker compose up -d postgres`
 #
 # passes params to pytest.
 # returned exit code are cumulative of pytest and doctests
@@ -35,7 +35,7 @@ fi
 
 
 PY_IGNORE_IMPORTMISMATCH=1 PYTHONPATH=backend \
-  python -m pytest  \
+  python3 -m pytest  \
     --instafail \
     --picked=first \
     --cov-report=term-missing:skip-covered \
@@ -56,7 +56,7 @@ else
 fi
 
 if [[ $RUN_DOCTESTS == 1 ]]; then
-    PYTHONPATH=backend python -m unittest --verbose tests.test_doctests
+    PYTHONPATH=backend python3 -m unittest --verbose tests.test_doctests
 
     if [ $? -eq 0 ]; then
       echo

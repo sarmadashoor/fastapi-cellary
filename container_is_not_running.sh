@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 #
-# Check if the $1 docker-compose service is running for docker-compose env $2
+# Check if the $1 docker compose service is running for docker compose env $2
 # Default env is empty
 #
 # Usage:
