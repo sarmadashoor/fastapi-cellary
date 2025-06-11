@@ -1,0 +1,406 @@
+# Security-hardened Docker Compose configuration
+# Production-ready setup with enhanced security controls
+
+version: '3.8'
+
+x-common-environment: &common-environment
+  # Security: Common environment variables
+  PYTHONUNBUFFERED: 1
+  PYTHONDONTWRITEBYTECODE: 1
+  PYTHONHASHSEED: random
+  
+x-logging: &default-logging
+  # Security: Centralized logging configuration
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+    labels: "service,environment"
+
+x-security-options: &security-options
+  # Security: Common security options
+  security_opt:
+    - no-new-privileges:true
+  cap_drop:
+    - ALL
+  read_only: true
+
+networks:
+  # Security: Custom networks with isolation
+  frontend:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_icc: "false"
+      com.docker.network.bridge.enable_ip_masquerade: "true"
+      com.docker.network.driver.mtu: "1450"
+  backend:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_icc: "true"
+      com.docker.network.bridge.enable_ip_masquerade: "false"
+      com.docker.network.driver.mtu: "1450"
+  database:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_icc: "true"
+      com.docker.network.bridge.enable_ip_masquerade: "false"
+      com.docker.network.driver.mtu: "1450"
+
+volumes:
+  # Security: Named volumes with proper permissions
+  postgres-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind,uid=999,gid=999
+      device: ./data/postgres
+  redis-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind,uid=999,gid=999
+      device: ./data/redis
+  app-logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind,uid=1000,gid=1000
+      device: ./logs
+  nginx-logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind,uid=101,gid=101
+      device: ./logs/nginx
+
+services:
+
+  # Database service with security hardening
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres-hardened
+    restart: unless-stopped
+    <<: *security-options
+    
+    # Security: Resource limits
+    mem_limit: 512m
+    mem_reservation: 256m
+    cpus: '1.0'
+    
+    # Security: User and group
+    user: "999:999"
+    
+    # Security: Environment variables
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-fastapi_db}
+      POSTGRES_USER: ${POSTGRES_USER:-fastapi_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD required}
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256 --auth-local=scram-sha-256"
+    
+    # Security: Read-only filesystem with specific writable volumes
+    read_only: true
+    tmpfs:
+      - /tmp:noexec,nosuid,size=100m
+      - /var/run/postgresql:noexec,nosuid,size=10m
+    
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/pgdata
+      - ./docker/postgres/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+      - ./docker/postgres/postgresql-hardened.conf:/etc/postgresql/postgresql.conf:ro
+    
+    networks:
+      - database
+    
+    # Security: Health check
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-fastapi_user} -d ${POSTGRES_DB:-fastapi_db}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    
+    logging: *default-logging
+
+  # Redis service with security hardening
+  redis:
+    build:
+      context: .
+      dockerfile: docker/redis/Dockerfile.hardened
+      args:
+        BUILD_DATE: ${BUILD_DATE:-unknown}
+        VCS_REF: ${VCS_REF:-unknown}
+        VERSION: ${VERSION:-latest}
+    container_name: redis-hardened
+    restart: unless-stopped
+    <<: *security-options
+    
+    # Security: Resource limits
+    mem_limit: 256m
+    mem_reservation: 128m
+    cpus: '0.5'
+    
+    # Security: User and group
+    user: "999:999"
+    
+    # Security: Environment variables
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?REDIS_PASSWORD required}
+      REDIS_APP_PASSWORD: ${REDIS_APP_PASSWORD:-${REDIS_PASSWORD}}
+      REDIS_CELERY_PASSWORD: ${REDIS_CELERY_PASSWORD:-${REDIS_PASSWORD}}
+      REDIS_MONITOR_PASSWORD: ${REDIS_MONITOR_PASSWORD:-${REDIS_PASSWORD}}
+    
+    # Security: Read-only filesystem with specific writable volumes
+    read_only: true
+    tmpfs:
+      - /tmp:noexec,nosuid,size=50m
+      - /var/run:noexec,nosuid,size=10m
+    
+    volumes:
+      - redis-data:/data
+      - app-logs:/var/log/redis
+    
+    networks:
+      - backend
+    
+    # Security: Health check
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli --no-auth-warning -a $REDIS_PASSWORD ping | grep PONG"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    
+    logging: *default-logging
+
+  # FastAPI backend service with security hardening
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile.hardened
+      args:
+        BUILD_DATE: ${BUILD_DATE:-unknown}
+        VCS_REF: ${VCS_REF:-unknown}
+        VERSION: ${VERSION:-latest}
+    container_name: backend-hardened
+    restart: unless-stopped
+    
+    # Security: Partial security options (need write access for logs)
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETUID
+      - SETGID
+    
+    # Security: Resource limits
+    mem_limit: 1g
+    mem_reservation: 512m
+    cpus: '2.0'
+    
+    # Security: User and group
+    user: "1000:1000"
+    
+    # Security: Environment variables
+    environment:
+      <<: *common-environment
+      DATABASE_URL: "postgresql://${POSTGRES_USER:-fastapi_user}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-fastapi_db}"
+      REDIS_URL: "redis://:${REDIS_PASSWORD}@redis:6379/0"
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET required}
+      JWT_ALGORITHM: ${JWT_ALGORITHM:-HS256}
+      JWT_EXPIRATION_HOURS: ${JWT_EXPIRATION_HOURS:-24}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?ADMIN_PASSWORD required}
+      
+    # Security: Writable volumes for application needs
+    tmpfs:
+      - /tmp:noexec,nosuid,size=100m
+    
+    volumes:
+      - app-logs:/app/logs
+      - ./backend:/app:ro  # Read-only code mount for development
+    
+    networks:
+      - backend
+      - database
+    
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    
+    # Security: Health check
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/api/observability/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    
+    logging: *default-logging
+
+  # Celery worker service with security hardening
+  celeryworker:
+    build:
+      context: .
+      dockerfile: docker/celeryworker/Dockerfile.hardened
+      args:
+        BUILD_DATE: ${BUILD_DATE:-unknown}
+        VCS_REF: ${VCS_REF:-unknown}
+        VERSION: ${VERSION:-latest}
+    container_name: celeryworker-hardened
+    restart: unless-stopped
+    
+    # Security: Partial security options (need write access for logs)
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETUID
+      - SETGID
+    
+    # Security: Resource limits
+    mem_limit: 1g
+    mem_reservation: 256m
+    cpus: '2.0'
+    
+    # Security: User and group
+    user: "1001:1001"
+    
+    # Security: Environment variables
+    environment:
+      <<: *common-environment
+      CELERY_BROKER_URL: "redis://:${REDIS_PASSWORD}@redis:6379/0"
+      DATABASE_URL: "postgresql://${POSTGRES_USER:-fastapi_user}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-fastapi_db}"
+      CELERY_CONCURRENCY: ${CELERY_CONCURRENCY:-4}
+      CELERY_MAX_TASKS_PER_CHILD: ${CELERY_MAX_TASKS_PER_CHILD:-1000}
+      CELERY_MAX_MEMORY_PER_CHILD: ${CELERY_MAX_MEMORY_PER_CHILD:-200000}
+      CELERY_SOFT_TIME_LIMIT: ${CELERY_SOFT_TIME_LIMIT:-300}
+      CELERY_HARD_TIME_LIMIT: ${CELERY_HARD_TIME_LIMIT:-360}
+      C_FORCE_ROOT: 1
+    
+    # Security: Writable volumes for application needs
+    tmpfs:
+      - /tmp:noexec,nosuid,size=100m
+      - /var/lib/clamav:noexec,nosuid,size=500m
+    
+    volumes:
+      - app-logs:/var/log/celery
+      - ./backend:/app:ro  # Read-only code mount
+    
+    networks:
+      - backend
+      - database
+    
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    
+    # Security: Health check
+    healthcheck:
+      test: ["CMD-SHELL", "celery -A app.celery_app inspect ping || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 45s
+    
+    logging: *default-logging
+
+  # Nginx reverse proxy with security hardening
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile.hardened
+      args:
+        BUILD_DATE: ${BUILD_DATE:-unknown}
+        VCS_REF: ${VCS_REF:-unknown}
+        VERSION: ${VERSION:-latest}
+    container_name: nginx-hardened
+    restart: unless-stopped
+    <<: *security-options
+    
+    # Security: Resource limits
+    mem_limit: 256m
+    mem_reservation: 64m
+    cpus: '1.0'
+    
+    # Security: User and group
+    user: "101:101"
+    
+    # Security: Read-only filesystem with specific writable volumes
+    read_only: true
+    tmpfs:
+      - /tmp:noexec,nosuid,size=50m
+      - /var/cache/nginx:noexec,nosuid,size=50m
+      - /var/run/nginx:noexec,nosuid,size=10m
+    
+    volumes:
+      - nginx-logs:/var/log/nginx
+    
+    ports:
+      - "8001:8001"
+    
+    networks:
+      - frontend
+      - backend
+    
+    depends_on:
+      backend:
+        condition: service_healthy
+    
+    # Security: Health check
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8001/api/observability/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    
+    logging: *default-logging
+
+  # Security monitoring service (optional)
+  monitoring:
+    image: prom/node-exporter:latest
+    container_name: monitoring-hardened
+    restart: unless-stopped
+    <<: *security-options
+    
+    # Security: Resource limits
+    mem_limit: 128m
+    mem_reservation: 32m
+    cpus: '0.25'
+    
+    # Security: User and group
+    user: "65534:65534"
+    
+    command:
+      - '--path.rootfs=/host'
+      - '--web.listen-address=:9100'
+      - '--collector.disable-defaults'
+      - '--collector.cpu'
+      - '--collector.diskstats'
+      - '--collector.filesystem'
+      - '--collector.loadavg'
+      - '--collector.meminfo'
+      - '--collector.netdev'
+      - '--collector.time'
+      - '--collector.uname'
+    
+    volumes:
+      - /:/host:ro,rslave
+    
+    networks:
+      - backend
+    
+    # Security: Health check
+    healthcheck:
+      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://localhost:9100/metrics || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    
+    logging: *default-logging

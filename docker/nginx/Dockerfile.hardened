@@ -1,0 +1,71 @@
+# Security-hardened nginx reverse proxy
+FROM nginx:1.25-alpine
+
+# Set build arguments
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
+
+# Metadata
+LABEL maintainer="security@fastapi-celery.com" \
+      org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.name="fastapi-celery-nginx-hardened" \
+      org.label-schema.description="Security-hardened nginx reverse proxy" \
+      org.label-schema.url="https://github.com/fastapi-celery/nginx" \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.version=$VERSION \
+      org.label-schema.schema-version="1.0"
+
+# Security: Install security tools and remove unnecessary packages
+RUN apk add --no-cache \
+    dumb-init \
+    su-exec \
+    curl \
+    && apk del --no-cache \
+    wget
+
+# Security: Create nginx user with minimal privileges
+RUN addgroup -g 101 -S nginx-app \
+    && adduser -u 101 -S -G nginx-app -h /var/cache/nginx -s /bin/false nginx-app
+
+# Security: Create necessary directories with correct ownership
+RUN mkdir -p /var/log/nginx /var/cache/nginx /var/run/nginx \
+    && chown -R nginx-app:nginx-app /var/log/nginx /var/cache/nginx /var/run/nginx \
+    && chmod 755 /var/log/nginx /var/cache/nginx /var/run/nginx
+
+# Security: Remove default nginx configuration
+RUN rm -f /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copy hardened nginx configuration
+COPY docker/nginx/nginx-hardened.conf /etc/nginx/nginx.conf
+COPY docker/nginx/fastapi-hardened.conf /etc/nginx/conf.d/fastapi.conf
+
+# Copy security headers configuration
+COPY docker/nginx/security-headers.conf /etc/nginx/conf.d/security-headers.conf
+
+# Copy hardened startup script
+COPY docker/nginx/start-hardened.sh /usr/local/bin/start-nginx.sh
+RUN chmod +x /usr/local/bin/start-nginx.sh
+
+# Security: Set file permissions
+RUN chmod 644 /etc/nginx/nginx.conf /etc/nginx/conf.d/*.conf \
+    && chown root:root /etc/nginx/nginx.conf /etc/nginx/conf.d/*.conf
+
+# Security: Create HTML directory with minimal content
+RUN mkdir -p /usr/share/nginx/html \
+    && echo '<!DOCTYPE html><html><head><title>FastAPI Celery</title></head><body><h1>Service Unavailable</h1></body></html>' > /usr/share/nginx/html/index.html \
+    && chown -R nginx-app:nginx-app /usr/share/nginx/html
+
+# Security: Expose only necessary ports
+EXPOSE 8001
+
+# Security: Set working directory
+WORKDIR /etc/nginx
+
+# Security: Use dumb-init and drop privileges
+ENTRYPOINT ["dumb-init", "--"]
+CMD ["start-nginx.sh"]
+
+# Security: Add health check
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:8001/api/observability/health || exit 1

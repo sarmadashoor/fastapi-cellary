@@ -1,0 +1,14 @@
+# Redis ACL configuration for security hardening
+# Defines user permissions and access controls
+
+# Default user - disabled for security
+user default off
+
+# Application user for FastAPI backend
+user fastapi_app on >app_redis_password ~* &* -@dangerous +@read +@write +@string +@list +@hash +@set +@sorted_set +@connection +@transaction
+
+# Celery worker user
+user celery_worker on >celery_redis_password ~celery:* ~result:* &* -@dangerous +@read +@write +@string +@list +@hash +@set +@connection +@transaction
+
+# Monitoring user (read-only)
+user monitoring on >monitor_redis_password ~* -@all +info +ping +client +config|get

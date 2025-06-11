@@ -1,0 +1,119 @@
+# Security-hardened FastAPI backend container
+# Uses multi-stage build and minimal base image for security
+
+# Build stage with development dependencies
+FROM python:3.12-slim as builder
+
+# Set build arguments
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
+
+# Metadata
+LABEL maintainer="security@fastapi-celery.com" \
+      org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.name="fastapi-celery-backend-hardened" \
+      org.label-schema.description="Security-hardened FastAPI backend" \
+      org.label-schema.url="https://github.com/fastapi-celery/backend" \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.version=$VERSION \
+      org.label-schema.schema-version="1.0"
+
+# Security: Create non-root user for build stage
+RUN groupadd -r fastapi && useradd -r -g fastapi -s /bin/false -c "FastAPI user" fastapi
+
+# Security: Install only essential packages and clean up immediately
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    python3-dev \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Create virtual environment for isolation
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Copy and install Python dependencies
+COPY docker/backend/requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
+    && pip install --no-cache-dir -r /tmp/requirements.txt \
+    && pip install --no-cache-dir uvicorn[standard] gunicorn
+
+# Install security tools
+RUN pip install --no-cache-dir \
+    bandit \
+    safety \
+    semgrep
+
+# Runtime stage with minimal dependencies
+FROM python:3.12-slim as runtime
+
+# Set build arguments for runtime
+ARG BUILD_DATE
+ARG VCS_REF  
+ARG VERSION
+
+# Metadata for runtime image
+LABEL maintainer="security@fastapi-celery.com" \
+      org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.name="fastapi-celery-backend-hardened" \
+      org.label-schema.description="Security-hardened FastAPI backend" \
+      org.label-schema.url="https://github.com/fastapi-celery/backend" \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.version=$VERSION \
+      org.label-schema.schema-version="1.0"
+
+# Security: Install only runtime essentials
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq5 \
+    ca-certificates \
+    dumb-init \
+    curl \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Security: Create application user with minimal privileges
+RUN groupadd -r -g 1000 fastapi \
+    && useradd -r -u 1000 -g fastapi -d /app -s /bin/false -c "FastAPI user" fastapi
+
+# Security: Create app directory with correct ownership
+RUN mkdir -p /app /app/logs /app/tmp \
+    && chown -R fastapi:fastapi /app
+
+# Copy virtual environment from builder
+COPY --from=builder --chown=fastapi:fastapi /opt/venv /opt/venv
+
+# Security: Copy application code with correct ownership
+COPY --chown=fastapi:fastapi backend /app
+
+# Copy hardened startup script
+COPY --chown=fastapi:fastapi docker/backend/start-hardened.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
+# Security: Set PATH to include venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Security: Set working directory
+WORKDIR /app
+
+# Security: Expose only necessary port
+EXPOSE 8000
+
+# Security: Set security-focused environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONHASHSEED=random \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8
+
+# Security: Drop privileges and use dumb-init
+USER fastapi
+ENTRYPOINT ["dumb-init", "--"]
+CMD ["./start.sh"]
+
+# Security: Add health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:8000/api/observability/health || exit 1

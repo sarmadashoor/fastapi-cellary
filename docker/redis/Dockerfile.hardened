@@ -1,0 +1,57 @@
+# Security-hardened Redis container
+FROM redis:7-alpine
+
+# Set build arguments
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
+
+# Metadata
+LABEL maintainer="security@fastapi-celery.com" \
+      org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.name="fastapi-celery-redis-hardened" \
+      org.label-schema.description="Security-hardened Redis cache" \
+      org.label-schema.url="https://github.com/fastapi-celery/redis" \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.version=$VERSION \
+      org.label-schema.schema-version="1.0"
+
+# Security: Create Redis user with minimal privileges
+RUN addgroup -g 999 -S redis-app \
+    && adduser -u 999 -S -G redis-app -h /data -s /bin/false redis-app
+
+# Security: Install security tools
+RUN apk add --no-cache \
+    dumb-init \
+    su-exec
+
+# Security: Create directories with correct ownership
+RUN mkdir -p /data /var/log/redis \
+    && chown -R redis-app:redis-app /data /var/log/redis \
+    && chmod 750 /data /var/log/redis
+
+# Copy hardened Redis configuration
+COPY docker/redis/redis-hardened.conf /usr/local/etc/redis/redis.conf
+RUN chmod 640 /usr/local/etc/redis/redis.conf \
+    && chown redis-app:redis-app /usr/local/etc/redis/redis.conf
+
+# Copy hardened startup script
+COPY docker/redis/start-hardened.sh /usr/local/bin/start-redis.sh
+RUN chmod +x /usr/local/bin/start-redis.sh
+
+# Security: Set working directory
+WORKDIR /data
+
+# Security: Expose only necessary port
+EXPOSE 6379
+
+# Security: Set security-focused environment variables
+ENV REDIS_DISABLE_COMMANDS="FLUSHDB,FLUSHALL,KEYS,PEXPIRE,DEL,CONFIG,SHUTDOWN,DEBUG,EVAL"
+
+# Security: Use dumb-init and drop privileges
+ENTRYPOINT ["dumb-init", "--"]
+CMD ["start-redis.sh"]
+
+# Security: Add health check
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+  CMD redis-cli ping | grep PONG || exit 1
