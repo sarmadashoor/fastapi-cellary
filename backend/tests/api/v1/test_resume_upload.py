@@ -24,7 +24,7 @@ class TestResumeUpload:
     @pytest.mark.resume
     @pytest.mark.does_not_change_db
     @patch('app.workers.resume_parser.parse_resume_task.delay')
-    def test_upload_valid_pdf_file(self, mock_celery_task, client):
+    def test_upload_valid_pdf_file(self, mock_celery_task, client, admin_token):
         """Test uploading a valid PDF file under 5MB returns 200 OK with task_id and queues Celery task."""
         # Mock Celery task delay to return a task object with id
         mock_task = type('MockTask', (), {'id': 'test-task-id-12345'})()
@@ -41,7 +41,8 @@ class TestResumeUpload:
             with open(temp_file.name, "rb") as f:
                 response = client.post(
                     "/api/resumes/upload",
-                    files={"file": ("resume.pdf", f, "application/pdf")}
+                    files={"file": ("resume.pdf", f, "application/pdf")},
+                    headers={"Authorization": f"Bearer {admin_token}"}
                 )
         
         # Clean up
@@ -66,7 +67,7 @@ class TestResumeUpload:
     @pytest.mark.resume
     @pytest.mark.does_not_change_db
     @patch('app.workers.resume_parser.parse_resume_task.delay')
-    def test_upload_valid_docx_file(self, mock_celery_task, client):
+    def test_upload_valid_docx_file(self, mock_celery_task, client, admin_token):
         """Test uploading a valid DOCX file under 5MB returns 200 OK with task_id and queues Celery task."""
         # Mock Celery task delay to return a task object with id
         mock_task = type('MockTask', (), {'id': 'test-docx-task-67890'})()
@@ -78,7 +79,7 @@ class TestResumeUpload:
         
         files = {"file": ("resume.docx", io.BytesIO(docx_content), "application/vnd.openxmlformats-officedocument.wordprocessingml.document")}
         
-        response = client.post("/api/resumes/upload", files=files)
+        response = client.post("/api/resumes/upload", files=files, headers={"Authorization": f"Bearer {admin_token}"})
         
         assert response.status_code == status.HTTP_200_OK, (
             f"Expected 200 OK for valid DOCX upload, got {response.status_code}: {response.text}"
@@ -98,13 +99,13 @@ class TestResumeUpload:
 
     @pytest.mark.resume
     @pytest.mark.does_not_change_db
-    def test_upload_unsupported_file_type(self, client):
+    def test_upload_unsupported_file_type(self, client, admin_token):
         """Test uploading an unsupported file type returns 400 Bad Request."""
         txt_content = b"This is a plain text resume file content."
         
         files = {"file": ("resume.txt", io.BytesIO(txt_content), "text/plain")}
         
-        response = client.post("/api/resumes/upload", files=files)
+        response = client.post("/api/resumes/upload", files=files, headers={"Authorization": f"Bearer {admin_token}"})
         
         assert response.status_code == status.HTTP_400_BAD_REQUEST, (
             f"Expected 400 Bad Request for unsupported file type, got {response.status_code}: {response.text}"
@@ -118,7 +119,7 @@ class TestResumeUpload:
 
     @pytest.mark.resume
     @pytest.mark.does_not_change_db
-    def test_upload_file_exceeds_size_limit(self, client):
+    def test_upload_file_exceeds_size_limit(self, client, admin_token):
         """Test uploading a file over 5MB returns 413 Payload Too Large."""
         # Create a file larger than 5MB
         large_pdf_content = b"%PDF-1.4\n1 0 obj\n<<\n/Type /Catalog\n/Pages 2 0 R\n>>\nendobj\n"
@@ -126,7 +127,7 @@ class TestResumeUpload:
         
         files = {"file": ("large_resume.pdf", io.BytesIO(large_pdf_content), "application/pdf")}
         
-        response = client.post("/api/resumes/upload", files=files)
+        response = client.post("/api/resumes/upload", files=files, headers={"Authorization": f"Bearer {admin_token}"})
         
         assert response.status_code == status.HTTP_413_REQUEST_ENTITY_TOO_LARGE, (
             f"Expected 413 Payload Too Large for oversized file, got {response.status_code}: {response.text}"
@@ -140,9 +141,9 @@ class TestResumeUpload:
 
     @pytest.mark.resume
     @pytest.mark.does_not_change_db
-    def test_upload_no_file_provided(self, client):
+    def test_upload_no_file_provided(self, client, admin_token):
         """Test uploading with no file returns 422 Unprocessable Entity."""
-        response = client.post("/api/resumes/upload")
+        response = client.post("/api/resumes/upload", headers={"Authorization": f"Bearer {admin_token}"})
         
         assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, (
             f"Expected 422 Unprocessable Entity for missing file, got {response.status_code}: {response.text}"
@@ -153,11 +154,11 @@ class TestResumeUpload:
 
     @pytest.mark.resume
     @pytest.mark.does_not_change_db
-    def test_upload_empty_file(self, client):
+    def test_upload_empty_file(self, client, admin_token):
         """Test uploading an empty file returns 400 Bad Request."""
         files = {"file": ("empty.pdf", io.BytesIO(b""), "application/pdf")}
         
-        response = client.post("/api/resumes/upload", files=files)
+        response = client.post("/api/resumes/upload", files=files, headers={"Authorization": f"Bearer {admin_token}"})
         
         assert response.status_code == status.HTTP_400_BAD_REQUEST, (
             f"Expected 400 Bad Request for empty file, got {response.status_code}: {response.text}"
@@ -171,14 +172,14 @@ class TestResumeUpload:
 
     @pytest.mark.resume
     @pytest.mark.does_not_change_db
-    def test_upload_response_schema_validation(self, client):
+    def test_upload_response_schema_validation(self, client, admin_token):
         """Test that successful upload response matches ResumeUploadResponse schema."""
         pdf_content = b"%PDF-1.4\n1 0 obj\n<<\n/Type /Catalog\n/Pages 2 0 R\n>>\nendobj\n"
         pdf_content += b"x" * (500 * 1024)  # 500KB file
         
         files = {"file": ("test_resume.pdf", io.BytesIO(pdf_content), "application/pdf")}
         
-        response = client.post("/api/resumes/upload", files=files)
+        response = client.post("/api/resumes/upload", files=files, headers={"Authorization": f"Bearer {admin_token}"})
         
         assert response.status_code == status.HTTP_200_OK, (
             f"Expected 200 OK for valid upload, got {response.status_code}: {response.text}"
@@ -205,7 +206,7 @@ class TestResumeUpload:
 
     @pytest.mark.resume  
     @pytest.mark.does_not_change_db
-    def test_upload_file_with_special_characters_in_name(self, client):
+    def test_upload_file_with_special_characters_in_name(self, client, admin_token):
         """Test uploading a file with special characters in filename."""
         pdf_content = b"%PDF-1.4\n1 0 obj\n<<\n/Type /Catalog\n/Pages 2 0 R\n>>\nendobj\n"
         pdf_content += b"x" * (100 * 1024)  # 100KB file
@@ -215,7 +216,7 @@ class TestResumeUpload:
         
         files = {"file": (special_filename, io.BytesIO(pdf_content), "application/pdf")}
         
-        response = client.post("/api/resumes/upload", files=files)
+        response = client.post("/api/resumes/upload", files=files, headers={"Authorization": f"Bearer {admin_token}"})
         
         assert response.status_code == status.HTTP_200_OK, (
             f"Expected 200 OK for file with special characters in name, got {response.status_code}: {response.text}"
@@ -226,7 +227,7 @@ class TestResumeUpload:
 
     @pytest.mark.resume
     @pytest.mark.does_not_change_db  
-    def test_upload_file_boundary_size_just_under_limit(self, client):
+    def test_upload_file_boundary_size_just_under_limit(self, client, admin_token):
         """Test uploading a file just under the 5MB limit succeeds."""
         # Create file just under 5MB (5MB - 1KB)
         size_just_under_limit = (5 * 1024 * 1024) - 1024
@@ -235,7 +236,7 @@ class TestResumeUpload:
         
         files = {"file": ("boundary_resume.pdf", io.BytesIO(pdf_content), "application/pdf")}
         
-        response = client.post("/api/resumes/upload", files=files)
+        response = client.post("/api/resumes/upload", files=files, headers={"Authorization": f"Bearer {admin_token}"})
         
         assert response.status_code == status.HTTP_200_OK, (
             f"Expected 200 OK for file just under size limit, got {response.status_code}: {response.text}"
@@ -246,7 +247,7 @@ class TestResumeUpload:
 
     @pytest.mark.resume
     @pytest.mark.does_not_change_db
-    def test_upload_file_boundary_size_just_over_limit(self, client):
+    def test_upload_file_boundary_size_just_over_limit(self, client, admin_token):
         """Test uploading a file just over the 5MB limit fails."""
         # Create file just over 5MB (5MB + 1KB)
         size_just_over_limit = (5 * 1024 * 1024) + 1024
@@ -255,7 +256,7 @@ class TestResumeUpload:
         
         files = {"file": ("boundary_resume.pdf", io.BytesIO(pdf_content), "application/pdf")}
         
-        response = client.post("/api/resumes/upload", files=files)
+        response = client.post("/api/resumes/upload", files=files, headers={"Authorization": f"Bearer {admin_token}"})
         
         assert response.status_code == status.HTTP_413_REQUEST_ENTITY_TOO_LARGE, (
             f"Expected 413 Payload Too Large for file just over size limit, got {response.status_code}: {response.text}"

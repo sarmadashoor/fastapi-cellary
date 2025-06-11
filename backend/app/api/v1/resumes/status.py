@@ -7,9 +7,10 @@ returning current state and results when available.
 
 import logging
 from celery.result import AsyncResult
-from fastapi import APIRouter, HTTPException, Path, status
+from fastapi import APIRouter, Depends, HTTPException, Path, status
 
 from app.api.v1.models.resumes import ResumeStatusResponse
+from app.api.v1.auth.get_user_group import get_user_group
 from app.celery_app import celery_app
 
 # Configure logger
@@ -138,7 +139,8 @@ async def get_resume_status(
         description="Unique task identifier returned by the upload endpoint",
         example="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         min_length=1
-    )
+    ),
+    user_group: str = Depends(get_user_group),
 ) -> ResumeStatusResponse:
     """
     Get the status and results of a resume parsing task.

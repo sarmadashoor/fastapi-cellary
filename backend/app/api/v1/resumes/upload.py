@@ -16,7 +16,9 @@ import time
 from app.api.v1.models.resumes import ResumeUploadResponse
 from app.workers.resume_parser import parse_resume_task
 from app.logging_config import get_logger
-from fastapi import APIRouter, File, HTTPException, UploadFile, status
+from app.api.v1.auth.get_user_group import get_user_group
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
+from fastapi.security import SecurityScopes
 
 # Configure structured logger
 logger = get_logger(__name__)
@@ -261,6 +263,7 @@ async def upload_resume(
         description="Resume file to process (PDF or DOCX format, maximum 5MB)",
         media_type="application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     ),
+    user_group: str = Depends(get_user_group),
 ) -> ResumeUploadResponse:
     """
     Upload and process a resume file.
