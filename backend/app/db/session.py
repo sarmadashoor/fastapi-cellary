@@ -1,3 +1,9 @@
+"""Database session management with connection pooling and security.
+
+This module provides secure database connection management using SQLAlchemy
+with connection pooling, monitoring, and security hardening features.
+"""
+
 import logging
 from typing import Any, Optional
 
@@ -16,6 +22,14 @@ log = logging.getLogger()
 
 
 def engine(config: Config) -> Engine:
+    """Create or return cached database engine with security hardening.
+    
+    Args:
+        config: Application configuration containing database settings.
+        
+    Returns:
+        Engine: SQLAlchemy engine instance with connection pooling and monitoring.
+    """
     global _engine  # pylint: disable=global-statement
     if _engine:
         return _engine
@@ -57,6 +71,14 @@ def engine(config: Config) -> Engine:
 
 
 def session_maker(config: Config) -> Any:
+    """Create or return cached SQLAlchemy session maker.
+    
+    Args:
+        config: Application configuration for database connection.
+        
+    Returns:
+        sessionmaker: Configured session factory for database operations.
+    """
     global _session_maker  # pylint: disable=global-statement
     if not _session_maker:
         _session_maker = sessionmaker(
@@ -68,6 +90,14 @@ def session_maker(config: Config) -> Any:
 
 
 def get_session(config: Config) -> Session:
+    """Get database session instance for operations.
+    
+    Args:
+        config: Application configuration for database connection.
+        
+    Returns:
+        Session: SQLAlchemy session for database operations.
+    """
     if _injected_session_maker is not None:
         return _injected_session_maker()  # type: ignore
     return session_maker(config)()  # type: ignore

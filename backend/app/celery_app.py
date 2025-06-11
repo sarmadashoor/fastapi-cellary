@@ -55,6 +55,14 @@ class CeleryConfig:
 
 
 def get_task_packages(path: str) -> List[str]:
+    """Discover Celery task modules from directory structure.
+    
+    Args:
+        path: Directory path to scan for Python task modules.
+        
+    Returns:
+        List[str]: List of module paths for Celery task auto-discovery.
+    """
     result = []
     for dirpath, dirnames, filenames in os.walk(path):
         for name in filenames:

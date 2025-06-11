@@ -1,6 +1,7 @@
-"""
-Backend main
-Starts FASTAPI app
+"""FastAPI application entry point and configuration.
+
+This module configures and starts the FastAPI application with middleware,
+routing, database connections, and security hardening features.
 """
 
 import logging
@@ -91,8 +92,14 @@ async def db_session_middleware(
     request: Request,
     call_next: Callable[[Request], Any],
 ) -> Any:
-    """
-    Opens DB session for each API request
+    """Open database session for each API request with error handling.
+    
+    Args:
+        request: FastAPI request object.
+        call_next: Next middleware or route handler function.
+        
+    Returns:
+        Any: Response from the next handler in the chain.
     """
     try:
         request.state.db = app_session.get_session(app_config.get_config())

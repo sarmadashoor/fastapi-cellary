@@ -1,3 +1,10 @@
+"""Application configuration management using Pydantic Settings.
+
+This module provides centralized configuration management for the FastAPI Celery
+application, handling environment variables, database connections, Redis settings,
+and other application parameters with validation and type safety.
+"""
+
 import logging
 from functools import lru_cache
 from typing import List, Tuple
@@ -11,6 +18,11 @@ API_V1_STR = "/api"
 
 @lru_cache
 def get_config() -> "Config":
+    """Get cached application configuration instance.
+    
+    Returns:
+        Config: Singleton configuration instance with environment variables loaded.
+    """
     return Config()
 
 
@@ -61,6 +73,11 @@ class Config(BaseSettings):
     }
 
     def __init__(self, **kwargs) -> None:
+        """Initialize configuration with environment variables and validation.
+        
+        Args:
+            **kwargs: Additional configuration parameters.
+        """
         super().__init__(**kwargs)
         log.info(
             f"Backend started with MQ '{self.mq_uri}' and DB '{self.db_uri}', celery '{self.celery_backend_uri}', '{self.celery_broker_uri}'",
@@ -129,6 +146,11 @@ class Config(BaseSettings):
 
     @property
     def db_uri(self) -> str:
+        """Construct PostgreSQL database connection URI.
+        
+        Returns:
+            str: Complete PostgreSQL connection string with credentials.
+        """
         return (
             f"postgresql+psycopg2://{self.db_user}:{self.db_password}@"
             f"{self.db_host}/{self.db_database}"
@@ -136,22 +158,47 @@ class Config(BaseSettings):
 
     @property
     def mq_uri(self) -> str:
+        """Construct message queue connection URI for AMQP broker.
+        
+        Returns:
+            str: PyAMQP connection string for message broker.
+        """
         return f"pyamqp://{self.mq_user}:{self.mq_password}@{self.mq_host}:{self.mq_port}/"
 
     @property
     def redis_host(self) -> str:
+        """Get Redis host from message queue configuration.
+        
+        Returns:
+            str: Redis server hostname.
+        """
         return self.mq_host
 
     @property
     def redis_port(self) -> int:
+        """Get Redis port from message queue configuration.
+        
+        Returns:
+            int: Redis server port number.
+        """
         return int(self.mq_port)
 
     @property
     def redis_db(self) -> int:
+        """Get Redis database number for application use.
+        
+        Returns:
+            int: Redis database index (1 for application data).
+        """
         return 1
 
     @property
     def redis(self) -> redis.Redis:  # type: ignore
+        """Create Redis client instance with authentication.
+        
+        Returns:
+            redis.Redis: Configured Redis client for application use.
+        """
         return redis.Redis(
             host=self.redis_host,
             port=self.redis_port,
@@ -161,12 +208,27 @@ class Config(BaseSettings):
 
     @property
     def redis_password(self) -> str:
+        """Get Redis password from message queue configuration.
+        
+        Returns:
+            str: Redis authentication password.
+        """
         return self.mq_password
 
     @property
     def celery_broker_uri(self) -> str:
+        """Construct Celery broker URI using Redis.
+        
+        Returns:
+            str: Redis URI for Celery message broker.
+        """
         return f"redis://:{self.mq_password}@{self.mq_host}:{self.mq_port}/0"
 
     @property
     def celery_backend_uri(self) -> str:
+        """Construct Celery result backend URI using Redis.
+        
+        Returns:
+            str: Redis URI for Celery result storage.
+        """
         return self.celery_broker_uri
