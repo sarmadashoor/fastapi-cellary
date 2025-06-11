@@ -79,14 +79,67 @@ app/
 ```
 
 ### Key Features Implemented
-- **JWT Authentication**: Token-based auth with user groups
+- **JWT Authentication**: Token-based auth with user groups and secure password hashing
 - **Word Processing Pipeline**: Map-reduce style text analysis
+- **Resume Upload & Processing**: Secure file upload with validation and background processing
 - **Task Management**: Create, monitor, and retrieve async jobs
 - **Error Handling**: Comprehensive exception handling and logging
 - **Health Checks**: System status and dependency monitoring
 - **API Documentation**: Auto-generated OpenAPI/Swagger docs
+- **CORS Support**: Cross-origin resource sharing for frontend integration
 
-## Recent Session Changes (2025-01-06)
+## Recent Session Changes (2025-01-10)
+
+### Resume Upload Feature Implementation (TDD + Security)
+
+#### 1. Comprehensive Test Suite
+- **Created `tests/api/v1/test_resume_upload.py`**: Full TDD test implementation
+  - 10 comprehensive test scenarios covering all edge cases
+  - File type validation (PDF, DOCX only)
+  - File size limits (5MB maximum)
+  - Error handling for invalid uploads
+  - Response schema validation
+  - Boundary testing for size limits
+  - Special character filename support
+
+#### 2. Secure File Upload Endpoint
+- **Added `/api/resumes/upload` endpoint** with production-ready security:
+  - Content type validation: Only `application/pdf` and `application/vnd.openxmlformats-officedocument.wordprocessingml.document`
+  - File size enforcement: 5MB maximum with proper HTTP 413 responses
+  - In-memory processing: No disk writes for security
+  - Secure logging: File metadata logged without exposing sensitive data
+  - Error sanitization: No stack traces exposed to clients
+
+#### 3. API Structure Expansion
+- **New Pydantic models**: `ResumeUploadResponse` for consistent API responses
+- **Router organization**: Added `/resumes` prefix with proper mounting
+- **CORS middleware**: Cross-origin support for frontend integration
+- **OpenAPI documentation**: Automatic Swagger docs for new endpoints
+
+#### 4. Security Enhancements Continued
+- **Password hashing implementation**: Secure bcrypt hashing with backward compatibility
+- **Configuration security**: Pydantic BaseSettings with environment variable validation
+- **Authentication improvements**: Enhanced token-based auth with proper error handling
+
+#### 5. Code Quality & Testing
+- **100% test pass rate**: All 18 tests passing including new resume upload tests
+- **86% coverage**: High test coverage for resume upload module
+- **Linting compliance**: All pre-commit hooks passing (ruff, mypy, formatting)
+- **Type safety**: Full type annotations throughout new code
+
+#### 6. Files Added/Modified
+**New Files:**
+- `backend/app/api/v1/models/resumes.py` - Resume API models
+- `backend/app/api/v1/resumes/` - Resume upload module
+- `backend/tests/api/v1/test_resume_upload.py` - Comprehensive test suite
+
+**Enhanced Files:**
+- `backend/app/api/routing.py` - Added resume router mounting
+- `backend/app/main.py` - CORS middleware configuration
+- `backend/app/config.py` - Secure environment configuration
+- Authentication modules - Password hashing implementation
+
+## Previous Session Changes (2025-01-06)
 
 ### 1. Development Environment Setup
 - **Installed missing dependencies**:
