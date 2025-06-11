@@ -17,6 +17,7 @@ from app.api.v1.models.resumes import ResumeUploadResponse
 from app.workers.resume_parser import parse_resume_task
 from app.logging_config import get_logger
 from app.api.v1.auth.get_user_group import get_user_group
+from app.validation.file_validation import comprehensive_file_validation, SecurityValidationError
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 from fastapi.security import SecurityScopes
 
@@ -38,15 +39,15 @@ ALLOWED_EXTENSIONS = {".pdf", ".docx"}
 router = APIRouter()
 
 
+# Legacy validation functions maintained for backward compatibility
+# These are now replaced by comprehensive_file_validation in upload endpoint
+
 def validate_file_type(file: UploadFile) -> None:
     """
-    Validate file type based on content type and extension.
-
-    Args:
-        file: The uploaded file to validate
-
-    Raises:
-        HTTPException: If file type is not supported
+    Legacy file type validation function.
+    
+    DEPRECATED: Use comprehensive_file_validation instead.
+    Maintained for backward compatibility with existing tests.
     """
     if not file.content_type or file.content_type not in ALLOWED_CONTENT_TYPES:
         logger.warning(
@@ -87,13 +88,10 @@ def validate_file_type(file: UploadFile) -> None:
 
 def validate_file_size(content: bytes) -> None:
     """
-    Validate file size.
-
-    Args:
-        content: The file content as bytes
-
-    Raises:
-        HTTPException: If file is too large or empty
+    Legacy file size validation function.
+    
+    DEPRECATED: Use comprehensive_file_validation instead.
+    Maintained for backward compatibility with existing tests.
     """
     content_size = len(content)
 
@@ -323,15 +321,12 @@ async def upload_resume(
             detail="No file provided",
         )
 
-    # Validate file type first (before reading content for security)
-    validate_file_type(file)
-
     try:
         # Read file content into memory for validation
         file_content = await file.read()
 
-        # Validate file size
-        validate_file_size(file_content)
+        # Run comprehensive security validation pipeline
+        comprehensive_file_validation(file, file_content)
 
         # Log successful upload (without exposing filename or user data)
         file_size_mb = len(file_content) / (1024 * 1024)
@@ -354,6 +349,31 @@ async def upload_resume(
 
         return ResumeUploadResponse(task_id=task_id)
 
+    except SecurityValidationError as e:
+        # Convert security validation errors to HTTP exceptions
+        status_code = status.HTTP_400_BAD_REQUEST
+        
+        # Use specific status codes for certain error types
+        if e.reason_code == "SECURITY_FILE_SIZE_VIOLATION":
+            status_code = status.HTTP_413_REQUEST_ENTITY_TOO_LARGE
+        elif e.reason_code in ["SECURITY_VIRUS_DETECTED", "SECURITY_EXECUTABLE_DETECTED"]:
+            status_code = status.HTTP_400_BAD_REQUEST  # Security threat
+        
+        logger.error(
+            "Security validation failed during upload",
+            extra={
+                "reason_code": e.reason_code,
+                "error_message": str(e),
+                "error_details": e.details,
+                "event": "upload_security_violation",
+                "processing_time_ms": round((time.time() - request_start_time) * 1000, 2)
+            }
+        )
+        
+        raise HTTPException(
+            status_code=status_code,
+            detail=str(e)
+        )
     except HTTPException:
         # Re-raise HTTP exceptions (validation errors)
         raise
