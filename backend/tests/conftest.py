@@ -2,19 +2,31 @@ import logging
 from pathlib import Path
 import os
 
+# Set test environment variables FIRST, before any imports
 os.environ["CELERY_TRACK_STARTED"] = "True"
 os.environ["CELERY_IGNORE_RESULT"] = "False"
 os.environ["CELERY_TASK_RESULT_EXPIRES"] = "6000"
 
-pytest_plugins = ("celery.contrib.pytest", )
+# Set required application config environment variables for tests
+test_env_vars = {
+    'ADMIN_LOGIN': 'test_admin',
+    'ADMIN_PASSWORD': 'test_password',
+    'JWT_SECRET_KEY': 'test_jwt_secret_key',
+    'AMQP_USERNAME': 'test_user',
+    'AMQP_PASSWORD': 'test_password',
+    'AMQP_HOST': 'localhost',
+    'AMQP_PORT': '6379',
+    'POSTGRES_DB': 'test_db',
+    'POSTGRES_USER': 'test_user', 
+    'POSTGRES_PASSWORD': 'test_password',
+    'POSTGRES_HOST': 'localhost',
+}
 
-# os.environ["ADMIN_LOGIN"] = "admin"
-# os.environ["ADMIN_PASSWORD"] = "admin"
-# os.environ["JWT_SECRET_KEY"] = "11d25e094faa6ca2556c818133b7a9563b93f7077f6f0f4caa6cf63b44e8d3e3"
-# os.environ["AMQP_USERNAME"] = "guest"
-# os.environ["AMQP_PASSWORD"] = "guest"
-# os.environ["AMQP_HOST"] = "redis"
-# os.environ["AMQP_PORT"] = "6379"
+for key, value in test_env_vars.items():
+    if key not in os.environ:
+        os.environ[key] = value
+
+pytest_plugins = ("celery.contrib.pytest", )
 
 import app.config
 import app.db.session
@@ -22,6 +34,8 @@ import tests.config as test_config
 import pytest
 from app import modules_load
 
+# Clear the cache before injecting test config
+app.config.get_config.cache_clear()
 app.config.get_config = test_config.get_test_config
 app.db.session.get_session = test_config.get_test_session
 

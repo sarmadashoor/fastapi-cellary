@@ -1,7 +1,8 @@
 """
 Injection functions to replace `get_config()` and `get_session()` in app under test
 """
-from typing import Optional
+import os
+from typing import Optional, ClassVar
 
 import fakeredis
 from app.config import Config
@@ -14,7 +15,8 @@ _session: Optional[Session] = None  # Inject test session here
 
 
 class TestConfig(Config):
-    headers = None
+    headers: ClassVar[Optional[dict]] = None
+    host: ClassVar[Optional[str]] = None
 
     @property
     def celery_broker_uri(self):
@@ -28,23 +30,25 @@ class TestConfig(Config):
     def redis(self):
         return fakeredis.FakeStrictRedis()
 
-    def __init__(self, config=None):
+    def __init__(self, config=None, **kwargs):
+        # Initialize parent class with environment variables
+        super().__init__(**kwargs)
+        
         if config is not None:  # init from pytest config
             # --host: server to test. if None we unittest with FASTAPI test client
-            self.host = config.getoption("host")
+            TestConfig.host = config.getoption("host")
 
             # --header: HTTP headers for all requests
             header_strings = config.getoption("headers")
             if header_strings is None:
                 header_strings = {}
-            self.headers = {}
+            TestConfig.headers = {}
             for option in header_strings:
                 key, _, value = option.partition(":")
-                self.headers[key] = value.strip()
+                TestConfig.headers[key] = value.strip()
         else:
-            self.host = None
-            self.headers = None
-        super().__init__()
+            TestConfig.host = None
+            TestConfig.headers = None
 
 
 def get_test_config():

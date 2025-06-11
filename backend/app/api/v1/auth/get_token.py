@@ -6,14 +6,37 @@ import app.config as app_config  # to not shadow global app var with FastAPI app
 import jwt
 from app.api.v1 import models as api_models
 from app.api.v1.auth import router
+from app.security import verify_password
 from fastapi import Body, HTTPException
 
 
 def authenticate_admin(login: str, password: str) -> bool:
-    return (  # type: ignore
-        login == app_config.get_config().admin_login
-        and password == app_config.get_config().admin_password
-    )
+    """
+    Authenticate admin user with secure password verification.
+
+    Args:
+        login: Username to authenticate
+        password: Plain text password to verify
+
+    Returns:
+        True if authentication successful, False otherwise
+    """
+    config = app_config.get_config()
+
+    # Check if login matches
+    if login != config.admin_login:
+        return False
+
+    # Get stored password (could be hashed or plaintext for backward compatibility)
+    stored_password = config.admin_password
+
+    # Check if stored password is already hashed (bcrypt hashes start with $2b$)
+    if stored_password.startswith("$2b$"):
+        # Use secure verification for hashed password
+        return verify_password(password, stored_password)
+    # Fallback to plaintext comparison for backward compatibility
+    # This should be removed in production after all passwords are migrated
+    return password == stored_password
 
 
 def create_access_token(

@@ -1,4 +1,5 @@
 from app.api.v1.auth import router as auth_router
+from app.api.v1.resumes import router as resumes_router
 from app.api.v1.root import router as root_router
 from app.api.v1.words import router as words_router
 from fastapi import APIRouter
@@ -16,12 +17,17 @@ TAGS = [
             "url": "https://example.com",
         },
     },
+    {
+        "name": "resumes",
+        "description": "Resume upload and processing",
+    },
 ]
 
 ROUTE_TABLE = [
     {"router": root_router, "tag": "tests"},
     {"prefix": "/auth", "router": auth_router, "tag": "security"},
     {"prefix": "/words", "router": words_router, "tag": "words"},
+    {"prefix": "/resumes", "router": resumes_router, "tag": "resumes"},
 ]
 
 

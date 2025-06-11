@@ -74,7 +74,7 @@ def get_user_group(
             app_config.get_config().jwt_secret_key,
             algorithms=[app_config.get_config().jwt_algorithm],
         )
-        user_group: str = payload.get("sub")
+        user_group: str | None = payload.get("sub")
         if user_group is None:
             raise credentials_exception
         token_scopes = payload.get("scopes", [])

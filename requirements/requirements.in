@@ -5,3 +5,5 @@ uvicorn
 gunicorn
 jupyterlab
 pyjwt
+pydantic-settings
+passlib[bcrypt]

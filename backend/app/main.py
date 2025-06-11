@@ -21,6 +21,7 @@ from app.api.routing import TAGS, router
 from app.config import API_V1_STR
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 
 log = logging.getLogger()
@@ -38,6 +39,19 @@ app = FastAPI(
         sqlalchemy.orm.exc.NoResultFound: db_not_found_exception_handler,
     },
 )
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",
+        "https://yourdomain.com",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.middleware("http")(unhandled_exception_middleware)
 app.include_router(router, prefix=API_V1_STR)
 
