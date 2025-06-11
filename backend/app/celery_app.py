@@ -45,24 +45,29 @@ def get_task_packages(path: str) -> List[str]:
     return result
 
 
-try:
-    celery_app = Celery(
-        "celery",
-        backend=app_config.get_config().celery_backend_uri,
-        broker=app_config.get_config().celery_broker_uri,
-        include=get_task_packages(os.path.join("app", "tasks")),
-    )
-    celery_app.config_from_object(Config)
-    celery_app.connection().ensure_connection(max_retries=3, timeout=15)
-    print(
-        f">>> celery_app: {app_config.get_config().celery_backend_uri}, {app_config.get_config().celery_broker_uri}",
-    )
-except OperationalError as e:
-    raise RuntimeError(
-        f"Connection to {app_config.get_config().celery_broker_uri} broker refused.",
-    ) from e
+# Initialize Celery app but don't test connection immediately
+celery_app = Celery(
+    "celery",
+    backend=app_config.get_config().celery_backend_uri,
+    broker=app_config.get_config().celery_broker_uri,
+    include=get_task_packages(os.path.join("app", "tasks")),
+)
+celery_app.config_from_object(Config)
 
-logger.info(f"Connection to {mq_uri} established.")
+print(
+    f">>> celery_app: {app_config.get_config().celery_backend_uri}, {app_config.get_config().celery_broker_uri}",
+)
+
+# Test connection only when needed, with better error handling
+def ensure_celery_connection():
+    """Ensure celery connection is available."""
+    try:
+        celery_app.connection().ensure_connection(max_retries=3, timeout=15)
+        logger.info(f"Connection to {mq_uri} established.")
+        return True
+    except OperationalError as e:
+        logger.error(f"Connection to {app_config.get_config().celery_broker_uri} broker refused: {e}")
+        return False
 
 celery_app.conf.task_default_queue = "main-queue"
 

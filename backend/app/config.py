@@ -51,7 +51,7 @@ class Config(BaseSettings):
         description="Message queue password",
     )
     mq_host: str = Field(default="localhost", env="AMQP_HOST", description="Message queue host")
-    mq_port: str = Field(default="5672", env="AMQP_PORT", description="Message queue port")
+    mq_port: str = Field(default="6379", env="AMQP_PORT", description="Message queue port")
 
     model_config = {
         "env_file": ".env",

@@ -41,7 +41,7 @@ services:
       - env/dev-postgres.env
       - env/dev-backend.env
     ports:
-      - "80:80"
+      - "8000:80"
 
   tests:
     build:
