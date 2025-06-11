@@ -1,7 +1,7 @@
 """
-Celery worker main and celery_app for tasks sender.
+Celery worker main and celery_app for tasks sender with security hardening.
 
-Register all tasks from app/tasks
+Register all tasks from app/tasks with security configurations.
 """
 
 import os.path
@@ -11,6 +11,7 @@ import app.config as app_config  # to not shadow global app var with FastAPI app
 from celery import Celery
 from fastapi.logger import logger
 from kombu.exceptions import OperationalError
+from app.tasks.security import worker_security, redis_security
 
 mq_uri = app_config.get_config().mq_uri
 logger.info(f"amqp_uri: {mq_uri}")
@@ -18,20 +19,39 @@ logger.info(f"amqp_uri: {mq_uri}")
 
 class CeleryConfig:
     """
+    Celery configuration with security hardening.
     https://docs.celeryproject.org/en/latest/userguide/configuration.html#configuration-and-defaults
     """
 
+    # Task execution security
     task_acks_late = True  # guarantee task completion but the task may be executed twice
     # if the worker crashes mid execution
-    result_expires = (
-        600  # A built-in periodic task will delete the results after this time (seconds)
-    )
-    # assuming that celery beat is enabled. The task runs daily at 4am.
-    # task_ignore_result = True  # now we control this per task
+    result_expires = 3600  # Results expire after 1 hour for security
     task_compression = "gzip"
     result_compression = "gzip"
     broker_connection_retry = True
     broker_connection_retry_on_startup = True
+    
+    # Security hardening
+    task_reject_on_worker_lost = True
+    worker_prefetch_multiplier = 1
+    task_time_limit = 300  # 5 minutes max per task
+    task_soft_time_limit = 270  # Soft limit at 4.5 minutes
+    worker_max_tasks_per_child = 50  # Restart worker after 50 tasks
+    worker_max_memory_per_child = 512000  # 512MB memory limit
+    
+    # Serialization security - only JSON, no pickle
+    accept_content = ['json']
+    task_serializer = 'json'
+    result_serializer = 'json'
+    
+    # Result backend security
+    result_persistent = False
+    
+    # Redis connection security
+    redis_max_connections = 20
+    redis_socket_timeout = 30.0
+    redis_socket_connect_timeout = 30.0
 
 
 def get_task_packages(path: str) -> List[str]:
@@ -57,6 +77,9 @@ celery_app = Celery(
     include=task_modules,
 )
 celery_app.config_from_object(CeleryConfig)
+
+# Apply security hardening
+worker_security.configure_worker_security(celery_app)
 
 print(
     f">>> celery_app: {app_config.get_config().celery_backend_uri}, {app_config.get_config().celery_broker_uri}",

@@ -2,6 +2,7 @@ import logging
 from typing import Any, Optional
 
 from app.config import Config
+from app.db.security import db_security
 from sqlalchemy import create_engine, event
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session, sessionmaker
@@ -19,7 +20,8 @@ def engine(config: Config) -> Engine:
     if _engine:
         return _engine
 
-    _engine = create_engine(
+    # Use secure database engine with SSL and security configurations
+    _engine = db_security.create_secure_engine(
         config.db_uri,
         pool_pre_ping=True,
         pool_size=config.db_pool_size,
