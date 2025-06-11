@@ -1,0 +1,126 @@
+{
+  "timestamp": "2025-06-11T10:34:50.881851",
+  "project_root": ".",
+  "total_issues": 10,
+  "critical_issues": 0,
+  "high_issues": 0,
+  "medium_issues": 10,
+  "low_issues": 0,
+  "categories": {
+    "dependency": 4,
+    "docker": 6
+  },
+  "issues": [
+    {
+      "severity": "medium",
+      "category": "dependency",
+      "title": "Potentially deprecated package: requests",
+      "description": "Check for deprecated requests versions < 2.25",
+      "file_path": "docker/backend/requirements.txt",
+      "line_number": null,
+      "cve_id": null,
+      "recommendation": "Review package status and consider alternatives"
+    },
+    {
+      "severity": "medium",
+      "category": "dependency",
+      "title": "Potentially deprecated package: urllib3",
+      "description": "Check for deprecated urllib3 versions < 1.26",
+      "file_path": "docker/backend/requirements.txt",
+      "line_number": null,
+      "cve_id": null,
+      "recommendation": "Review package status and consider alternatives"
+    },
+    {
+      "severity": "medium",
+      "category": "dependency",
+      "title": "Potentially deprecated package: requests",
+      "description": "Check for deprecated requests versions < 2.25",
+      "file_path": "docker/tests/requirements.txt",
+      "line_number": null,
+      "cve_id": null,
+      "recommendation": "Review package status and consider alternatives"
+    },
+    {
+      "severity": "medium",
+      "category": "dependency",
+      "title": "Potentially deprecated package: urllib3",
+      "description": "Check for deprecated urllib3 versions < 1.26",
+      "file_path": "docker/tests/requirements.txt",
+      "line_number": null,
+      "cve_id": null,
+      "recommendation": "Review package status and consider alternatives"
+    },
+    {
+      "severity": "medium",
+      "category": "docker",
+      "title": "Bind mount to sensitive directory",
+      "description": "Mounting sensitive host directory",
+      "file_path": "docker-compose.yml",
+      "line_number": 10,
+      "cve_id": null,
+      "recommendation": "Use named volumes or mount specific files only"
+    },
+    {
+      "severity": "medium",
+      "category": "docker",
+      "title": "Bind mount to sensitive directory",
+      "description": "Mounting sensitive host directory",
+      "file_path": "docker-compose-hardened.yml",
+      "line_number": 108,
+      "cve_id": null,
+      "recommendation": "Use named volumes or mount specific files only"
+    },
+    {
+      "severity": "medium",
+      "category": "docker",
+      "title": "Bind mount to sensitive directory",
+      "description": "Mounting sensitive host directory",
+      "file_path": "docker-compose-hardened.yml",
+      "line_number": 110,
+      "cve_id": null,
+      "recommendation": "Use named volumes or mount specific files only"
+    },
+    {
+      "severity": "medium",
+      "category": "docker",
+      "title": "Bind mount to sensitive directory",
+      "description": "Mounting sensitive host directory",
+      "file_path": "docker-compose-hardened.yml",
+      "line_number": 161,
+      "cve_id": null,
+      "recommendation": "Use named volumes or mount specific files only"
+    },
+    {
+      "severity": "medium",
+      "category": "docker",
+      "title": "Bind mount to sensitive directory",
+      "description": "Mounting sensitive host directory",
+      "file_path": "docker-compose-hardened.yml",
+      "line_number": 290,
+      "cve_id": null,
+      "recommendation": "Use named volumes or mount specific files only"
+    },
+    {
+      "severity": "medium",
+      "category": "docker",
+      "title": "Bind mount to sensitive directory",
+      "description": "Mounting sensitive host directory",
+      "file_path": "docker-compose-hardened.yml",
+      "line_number": 342,
+      "cve_id": null,
+      "recommendation": "Use named volumes or mount specific files only"
+    }
+  ],
+  "summary": {
+    "total_files_scanned": 4,
+    "critical_count": 0,
+    "high_count": 0,
+    "medium_count": 10,
+    "low_count": 0,
+    "categories": {
+      "dependency": 4,
+      "docker": 6
+    }
+  }
+}
