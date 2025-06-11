@@ -21,6 +21,7 @@ from app.api.exception_handlers import (
 from app.api.routing import TAGS, router
 from app.config import API_V1_STR
 from app.middleware.rate_limiting import rate_limit_middleware
+from app.middleware.observability import ObservabilityMiddleware
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
@@ -74,6 +75,9 @@ app.add_middleware(
     ],
     max_age=86400,  # Cache preflight response for 24 hours
 )
+
+# Add observability middleware (first for comprehensive monitoring)
+app.add_middleware(ObservabilityMiddleware, collect_detailed_metrics=True)
 
 # Add rate limiting middleware
 app.middleware("http")(rate_limit_middleware)

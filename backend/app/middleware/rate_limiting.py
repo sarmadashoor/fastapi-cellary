@@ -1,36 +1,47 @@
 """
-Rate limiting middleware for FastAPI applications.
+Advanced rate limiting middleware for FastAPI applications.
 
-This module provides simple in-memory rate limiting functionality
-for protecting API endpoints from abuse.
+This module provides comprehensive rate limiting and abuse detection:
+- Adaptive rate limiting based on client behavior
+- Attack pattern detection (SQL injection, XSS, etc.)
+- Client threat scoring and profiling
+- Automatic blocking of malicious clients
+- Detailed security event logging
 """
 
-import logging
 import time
-from collections import defaultdict
 from typing import Dict, Tuple
 
-from fastapi import HTTPException, Request, status
+from fastapi import Request, status
 from fastapi.responses import JSONResponse
 
-log = logging.getLogger(__name__)
+from app.validation.rate_limiting import advanced_rate_limiter, ThreatLevel
+from app.logging_config import get_logger
+from app.observability.metrics import metrics_collector
 
-# In-memory storage for rate limiting (use Redis in production)
-request_counts: Dict[str, Dict[str, Tuple[int, float]]] = defaultdict(lambda: defaultdict(lambda: (0, 0.0)))
+logger = get_logger(__name__)
 
-# Rate limit configurations per endpoint
-RATE_LIMITS = {
-    "/api/resumes/upload": {"requests": 10, "window": 300},  # 10 requests per 5 minutes
-    "/api/resumes/status": {"requests": 60, "window": 60},   # 60 requests per minute
+# Endpoint-specific rate limit rule mappings
+ENDPOINT_RULES = {
+    "/api/auth/get_token": "auth_strict",
+    "/api/auth/refresh_token": "auth_strict", 
+    "/api/resumes/upload": "upload_moderate",
+    "/api/resumes/status": "status_generous",
+    "/api/words/create": "api_general",
+    "/api/words/get": "api_general",
+    "/api/words/delete": "api_general",
+    "/api/observability/health": "status_generous",
+    "/api/observability/metrics": "api_general",
+    "/api/observability/resources": "api_general"
 }
 
-# Default rate limit for other endpoints
-DEFAULT_RATE_LIMIT = {"requests": 100, "window": 60}  # 100 requests per minute
+# Default rule for unspecified endpoints
+DEFAULT_RULE = "api_general"
 
 
 def get_client_ip(request: Request) -> str:
     """
-    Extract client IP address from request.
+    Extract client IP address from request with enhanced proxy support.
     
     Args:
         request: The FastAPI request object
@@ -41,165 +52,265 @@ def get_client_ip(request: Request) -> str:
     # Check for forwarded IP (behind proxy/load balancer)
     forwarded_for = request.headers.get("X-Forwarded-For")
     if forwarded_for:
+        # Take the first IP in the chain (original client)
         return forwarded_for.split(",")[0].strip()
     
-    # Check for real IP header
+    # Check for real IP header (nginx)
     real_ip = request.headers.get("X-Real-IP")
     if real_ip:
-        return real_ip
+        return real_ip.strip()
+    
+    # Check for Cloudflare
+    cf_ip = request.headers.get("CF-Connecting-IP")
+    if cf_ip:
+        return cf_ip.strip()
     
     # Fall back to client IP
     return request.client.host if request.client else "unknown"
 
 
-def get_rate_limit_config(path: str) -> Dict[str, int]:
+def get_rate_limit_rule(path: str) -> str:
     """
-    Get rate limit configuration for a given path.
+    Get rate limit rule name for a given path.
     
     Args:
         path: The request path
         
     Returns:
-        Dictionary with 'requests' and 'window' limits
+        Rate limit rule name
     """
     # Check for exact path match
-    if path in RATE_LIMITS:
-        return RATE_LIMITS[path]
+    if path in ENDPOINT_RULES:
+        return ENDPOINT_RULES[path]
     
-    # Check for status endpoint patterns (status endpoints with task IDs)
+    # Check for parameterized endpoints
     if "/api/resumes/status/" in path:
-        return RATE_LIMITS["/api/resumes/status"]
+        return "status_generous"
     
-    return DEFAULT_RATE_LIMIT
+    if "/api/words/" in path:
+        return "api_general"
+    
+    if "/api/auth/" in path:
+        return "auth_strict"
+    
+    if "/api/observability/" in path:
+        return "api_general"
+    
+    return DEFAULT_RULE
 
 
-def is_rate_limited(client_ip: str, path: str) -> Tuple[bool, Dict[str, int]]:
+def get_user_agent(request: Request) -> str:
     """
-    Check if a client is rate limited for a given path.
+    Extract user agent from request headers.
     
     Args:
-        client_ip: Client IP address
-        path: Request path
+        request: The FastAPI request object
         
     Returns:
-        Tuple of (is_limited, rate_limit_info)
+        User agent string
     """
-    config = get_rate_limit_config(path)
-    max_requests = config["requests"]
-    window_seconds = config["window"]
+    return request.headers.get("User-Agent", "")
+
+
+def get_geo_country(request: Request) -> str:
+    """
+    Extract geo country from request headers (if available).
     
-    # Normalize path for rate limiting (group status endpoints together)
-    rate_limit_key = path
-    if "/api/resumes/status/" in path:
-        rate_limit_key = "/api/resumes/status"
-    
-    current_time = time.time()
-    
-    # Get current count and window start time for this client/path
-    count, window_start = request_counts[client_ip][rate_limit_key]
-    
-    # Reset counter if window has expired
-    if current_time - window_start >= window_seconds:
-        count = 0
-        window_start = current_time
-    
-    # Increment counter
-    count += 1
-    request_counts[client_ip][rate_limit_key] = (count, window_start)
-    
-    # Check if limit exceeded
-    is_limited = count > max_requests
-    
-    rate_limit_info = {
-        "limit": max_requests,
-        "remaining": max(0, max_requests - count),
-        "reset_time": int(window_start + window_seconds),
-        "window": window_seconds
-    }
-    
-    return is_limited, rate_limit_info
+    Args:
+        request: The FastAPI request object
+        
+    Returns:
+        Country code or None
+    """
+    # Common headers used by CDNs and proxies
+    return (
+        request.headers.get("CF-IPCountry") or  # Cloudflare
+        request.headers.get("X-Country-Code") or  # Various proxies
+        request.headers.get("GeoIP-Country") or  # GeoIP services
+        None
+    )
 
 
 async def rate_limit_middleware(request: Request, call_next):
     """
-    Rate limiting middleware for FastAPI.
+    Advanced rate limiting middleware with abuse detection.
     
     Args:
         request: The incoming request
         call_next: The next middleware/endpoint in the chain
         
     Returns:
-        Response or rate limit error response
+        Response or rate limit/block error response
     """
     # Skip rate limiting for health checks and docs
-    if request.url.path in ["/docs", "/redoc", "/openapi.json", "/", "/api/"]:
+    exempt_paths = ["/docs", "/redoc", "/openapi.json", "/", "/api/", "/favicon.ico"]
+    if request.url.path in exempt_paths:
         return await call_next(request)
     
+    # Extract request information
     client_ip = get_client_ip(request)
     path = request.url.path
+    method = request.method
+    user_agent = get_user_agent(request)
+    geo_country = get_geo_country(request)
     
-    # Clean up old entries periodically (simple cleanup)
-    if int(time.time()) % 300 == 0:  # Every 5 minutes
-        cleanup_old_entries()
+    # Get rate limit rule for this endpoint
+    rule_name = get_rate_limit_rule(path)
+    
+    start_time = time.time()
     
     try:
-        is_limited, rate_info = is_rate_limited(client_ip, path)
+        # Check rate limits and get decision
+        is_allowed, limit_info = advanced_rate_limiter.check_rate_limit(
+            client_id=client_ip,
+            endpoint=path,
+            rule_name=rule_name
+        )
         
-        if is_limited:
-            log.warning(f"Rate limit exceeded for {client_ip} on {path}")
-            return JSONResponse(
-                status_code=status.HTTP_429_TOO_MANY_REQUESTS,
-                content={
-                    "detail": "Rate limit exceeded. Too many requests.",
-                    "limit": rate_info["limit"],
-                    "window": rate_info["window"],
-                    "reset_time": rate_info["reset_time"]
-                },
-                headers={
-                    "X-RateLimit-Limit": str(rate_info["limit"]),
-                    "X-RateLimit-Remaining": str(rate_info["remaining"]),
-                    "X-RateLimit-Reset": str(rate_info["reset_time"]),
-                    "Retry-After": str(rate_info["reset_time"] - int(time.time()))
+        if not is_allowed:
+            # Handle blocked or rate limited requests
+            if limit_info.get("blocked", False):
+                # Client is blocked due to suspicious activity
+                logger.warning(
+                    f"Blocked client attempted access: {client_ip}",
+                    extra={
+                        "event": "blocked_client_access",
+                        "client_ip": client_ip,
+                        "path": path,
+                        "method": method,
+                        "user_agent": user_agent,
+                        "blocked_until": limit_info.get("blocked_until"),
+                        "reason": limit_info.get("reason"),
+                        "security_event": True,
+                        "alert_priority": "high"
+                    }
+                )
+                
+                # Record security event
+                metrics_collector.record_security_event(
+                    event_type="blocked_client_access",
+                    severity="high",
+                    details={
+                        "client_ip": client_ip,
+                        "path": path,
+                        "method": method,
+                        "reason": limit_info.get("reason")
+                    }
+                )
+                
+                return JSONResponse(
+                    status_code=status.HTTP_403_FORBIDDEN,
+                    content={
+                        "detail": "Access denied due to suspicious activity.",
+                        "blocked_until": limit_info.get("blocked_until"),
+                        "contact": "Contact support if you believe this is an error"
+                    },
+                    headers={
+                        "X-Block-Reason": limit_info.get("reason", "suspicious_activity"),
+                        "Retry-After": "3600"  # Suggest retry after 1 hour
+                    }
+                )
+            else:
+                # Standard rate limit exceeded
+                logger.info(
+                    f"Rate limit exceeded: {client_ip} on {path}",
+                    extra={
+                        "event": "rate_limit_exceeded",
+                        "client_ip": client_ip,
+                        "path": path,
+                        "method": method,
+                        "rule_name": rule_name,
+                        "limit_info": limit_info,
+                        "security_event": True
+                    }
+                )
+                
+                # Calculate retry after time
+                retry_after = max(1, limit_info.get("reset_time", 0) - int(time.time()))
+                
+                return JSONResponse(
+                    status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+                    content={
+                        "detail": "Rate limit exceeded. Please slow down your requests.",
+                        "limit": limit_info.get("limit"),
+                        "window": limit_info.get("window"),
+                        "reset_time": limit_info.get("reset_time"),
+                        "rule": limit_info.get("rule_name")
+                    },
+                    headers={
+                        "X-RateLimit-Limit": str(limit_info.get("limit", 0)),
+                        "X-RateLimit-Remaining": str(limit_info.get("remaining", 0)),
+                        "X-RateLimit-Reset": str(limit_info.get("reset_time", 0)),
+                        "X-RateLimit-Rule": rule_name,
+                        "Retry-After": str(retry_after)
+                    }
+                )
+        
+        # Process the request
+        response = await call_next(request)
+        response_time = time.time() - start_time
+        
+        # Record the request for pattern analysis
+        advanced_rate_limiter.record_request(
+            client_id=client_ip,
+            endpoint=path,
+            method=method,
+            response_code=response.status_code,
+            response_time=response_time,
+            user_agent=user_agent,
+            geo_country=geo_country
+        )
+        
+        # Add rate limit headers to successful responses
+        if "limit" in limit_info:
+            response.headers["X-RateLimit-Limit"] = str(limit_info["limit"])
+            response.headers["X-RateLimit-Remaining"] = str(limit_info.get("remaining", 0))
+            response.headers["X-RateLimit-Reset"] = str(limit_info.get("reset_time", 0))
+            response.headers["X-RateLimit-Rule"] = rule_name
+        
+        # Log successful request
+        threat_level = advanced_rate_limiter.get_client_threat_level(client_ip)
+        if threat_level != ThreatLevel.LOW:
+            logger.info(
+                f"Request from elevated threat client: {client_ip}",
+                extra={
+                    "event": "elevated_threat_request",
+                    "client_ip": client_ip,
+                    "path": path,
+                    "threat_level": threat_level.value,
+                    "response_code": response.status_code,
+                    "response_time_ms": round(response_time * 1000, 2),
+                    "security_event": True
                 }
             )
-        
-        # Add rate limit headers to response
-        response = await call_next(request)
-        response.headers["X-RateLimit-Limit"] = str(rate_info["limit"])
-        response.headers["X-RateLimit-Remaining"] = str(rate_info["remaining"])
-        response.headers["X-RateLimit-Reset"] = str(rate_info["reset_time"])
-        
-        log.debug(f"Request from {client_ip} to {path}: {rate_info['remaining']} requests remaining")
         
         return response
         
     except Exception as e:
-        log.error(f"Error in rate limiting middleware: {e}")
-        # If rate limiting fails, allow the request through
+        logger.error(
+            f"Error in advanced rate limiting middleware: {e}",
+            extra={
+                "event": "rate_limiting_error",
+                "client_ip": client_ip,
+                "path": path,
+                "error": str(e),
+                "error_type": type(e).__name__
+            }
+        )
+        # If rate limiting fails, allow the request through but log the failure
+        metrics_collector.record_security_event(
+            event_type="rate_limiting_failure",
+            severity="medium",
+            details={"error": str(e), "client_ip": client_ip}
+        )
         return await call_next(request)
 
 
-def cleanup_old_entries():
-    """Clean up expired rate limit entries from memory."""
-    current_time = time.time()
-    clients_to_remove = []
+def get_rate_limiting_statistics() -> Dict:
+    """
+    Get current rate limiting statistics for monitoring.
     
-    for client_ip, paths in request_counts.items():
-        paths_to_remove = []
-        
-        for path, (count, window_start) in paths.items():
-            config = get_rate_limit_config(path)
-            if current_time - window_start >= config["window"]:
-                paths_to_remove.append(path)
-        
-        for path in paths_to_remove:
-            del paths[path]
-        
-        if not paths:
-            clients_to_remove.append(client_ip)
-    
-    for client_ip in clients_to_remove:
-        del request_counts[client_ip]
-    
-    if clients_to_remove or any(len(paths) for paths in request_counts.values()):
-        log.debug(f"Cleaned up rate limit entries: {len(clients_to_remove)} clients removed")
+    Returns:
+        Dictionary with current rate limiting statistics
+    """
+    return advanced_rate_limiter.get_statistics()

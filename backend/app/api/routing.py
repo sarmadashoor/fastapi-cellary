@@ -2,6 +2,7 @@ from app.api.v1.auth import router as auth_router
 from app.api.v1.resumes import router as resumes_router
 from app.api.v1.root import router as root_router
 from app.api.v1.words import router as words_router
+from app.api.v1.observability import router as observability_router
 from fastapi import APIRouter
 
 TAGS = [
@@ -29,6 +30,10 @@ TAGS = [
         "name": "words",
         "description": "Word processing and text analysis endpoints for map-reduce operations.",
     },
+    {
+        "name": "observability",
+        "description": "Application monitoring, health checks, metrics, and observability endpoints.",
+    },
 ]
 
 ROUTE_TABLE = [
@@ -36,6 +41,7 @@ ROUTE_TABLE = [
     {"prefix": "/auth", "router": auth_router, "tag": "security"},
     {"prefix": "/words", "router": words_router, "tag": "words"},
     {"prefix": "/resumes", "router": resumes_router, "tag": "resumes"},
+    {"prefix": "/observability", "router": observability_router, "tag": "observability"},
 ]
 
 

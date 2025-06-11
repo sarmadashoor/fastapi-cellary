@@ -1,8 +1,9 @@
 import logging
 from functools import lru_cache
+from typing import List, Tuple
 
 import redis
-from pydantic import Field
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings
 
 API_V1_STR = "/api"
@@ -64,6 +65,67 @@ class Config(BaseSettings):
         log.info(
             f"Backend started with MQ '{self.mq_uri}' and DB '{self.db_uri}', celery '{self.celery_backend_uri}', '{self.celery_broker_uri}'",
         )
+        
+        # Validate security configuration on startup
+        self._validate_security_config()
+    
+    @field_validator('jwt_secret_key')
+    @classmethod
+    def validate_jwt_secret(cls, v: str) -> str:
+        """Validate JWT secret strength."""
+        if v == "default_secret_key_change_in_production":
+            log.warning("⚠️  SECURITY WARNING: Using default JWT secret in production is dangerous!")
+        elif len(v) < 32:
+            log.warning(f"⚠️  SECURITY WARNING: JWT secret is only {len(v)} characters. Recommended minimum: 32 characters")
+        return v
+    
+    def _validate_security_config(self) -> None:
+        """Validate overall security configuration."""
+        security_issues = []
+        
+        # Check JWT secret
+        if self.jwt_secret_key == "default_secret_key_change_in_production":
+            security_issues.append("🔴 CRITICAL: Default JWT secret must be changed!")
+        elif len(self.jwt_secret_key) < 32:
+            security_issues.append(f"🟡 WARNING: JWT secret ({len(self.jwt_secret_key)} chars) should be at least 32 characters")
+        
+        # Check admin password
+        if self.admin_password == "admin":
+            security_issues.append("🔴 CRITICAL: Default admin password must be changed!")
+        elif not self.admin_password.startswith("$2b$"):
+            security_issues.append("🟡 WARNING: Admin password should be bcrypt hashed for security")
+        
+        # Check for other weak passwords
+        weak_passwords = ["password", "123456", "admin123", "root", "default"]
+        if self.admin_password in weak_passwords:
+            security_issues.append("🔴 CRITICAL: Admin password is too weak!")
+        
+        # Log security issues
+        if security_issues:
+            log.warning("🛡️  SECURITY CONFIGURATION ISSUES DETECTED:")
+            for issue in security_issues:
+                log.warning(f"  {issue}")
+            log.warning("🛡️  Please review and fix these security issues before deploying to production!")
+        else:
+            log.info("✅ Security configuration validation passed")
+    
+    def get_security_status(self) -> Tuple[bool, List[str]]:
+        """Get current security status."""
+        issues = []
+        
+        # JWT Secret validation
+        if self.jwt_secret_key == "default_secret_key_change_in_production":
+            issues.append("Default JWT secret in use")
+        elif len(self.jwt_secret_key) < 32:
+            issues.append(f"JWT secret too short ({len(self.jwt_secret_key)} chars)")
+        
+        # Password validation  
+        if self.admin_password == "admin":
+            issues.append("Default admin password in use")
+        elif not self.admin_password.startswith("$2b$"):
+            issues.append("Admin password not hashed")
+        
+        return len(issues) == 0, issues
 
     @property
     def db_uri(self) -> str:
