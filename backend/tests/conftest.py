@@ -109,3 +109,26 @@ def pytest_collection_modifyitems(config, items):
                 and "does_not_change_db" not in item.keywords
             ):
                 item.fixturenames.append("db")
+    
+    # Add test categorization markers based on test location and content
+    for item in items:
+        test_path = str(item.fspath)
+        
+        # Add markers based on test file location
+        if "test_auth" in test_path or "auth" in test_path:
+            item.add_marker(pytest.mark.security)
+        
+        if "performance" in test_path:
+            item.add_marker(pytest.mark.performance)
+            item.add_marker(pytest.mark.slow)
+        
+        if "integration" in test_path:
+            item.add_marker(pytest.mark.integration)
+        
+        if "test_resume" in test_path or "resume" in test_path:
+            item.add_marker(pytest.mark.resume)
+        
+        # Add unit marker to tests that don't have other category markers
+        markers = [mark.name for mark in item.iter_markers()]
+        if not any(marker in markers for marker in ["integration", "performance", "security"]):
+            item.add_marker(pytest.mark.unit)
