@@ -3,6 +3,7 @@ import io
 import json
 import logging
 from unittest.mock import MagicMock, patch
+from io import StringIO
 
 import pytest
 from fastapi.testclient import TestClient
@@ -77,26 +78,119 @@ class TestStructuredLogging:
         logger = logging_config.get_logger(__name__)
         assert hasattr(logger, 'info')  # Check it has logging methods
 
-    def test_structured_log_format(self, caplog):
-        """Test that logs are formatted as structured JSON."""
-        from app.logging_config import get_logger
+    def test_structured_formatter_json_output(self):
+        """Test that StructuredFormatter outputs valid JSON."""
+        from app.logging_config import StructuredFormatter
         
-        logger = get_logger("test_module")
+        formatter = StructuredFormatter()
+        logger = logging.getLogger("test_logger")
         
-        # Log a message with context
-        with caplog.at_level(logging.INFO):
-            logger.info("Test message", extra={
-                "user_id": "123",
-                "action": "upload",
-                "file_size": 1024
-            })
+        # Create a log record with extra fields
+        record = logger.makeRecord(
+            name="test_logger",
+            level=logging.INFO,
+            fn="test.py",
+            lno=10,
+            msg="Test message",
+            args=(),
+            exc_info=None
+        )
         
-        # Check that the log was captured
-        assert len(caplog.records) == 1
-        record = caplog.records[0]
+        # Add extra fields to the record
+        record.extra_fields = {
+            "user_id": "123",
+            "action": "upload",
+            "file_size": 1024
+        }
         
-        # Check that message is correct
-        assert "Test message" in record.message
+        # Format the record
+        formatted_output = formatter.format(record)
+        
+        # Parse as JSON to verify it's valid JSON
+        log_data = json.loads(formatted_output)
+        
+        # Verify required fields are present
+        assert log_data["level"] == "INFO"
+        assert log_data["logger"] == "test_logger"
+        assert log_data["message"] == "Test message"
+        assert log_data["user_id"] == "123"
+        assert log_data["action"] == "upload" 
+        assert log_data["file_size"] == 1024
+        assert "timestamp" in log_data
+
+    def test_structured_logger_context_propagation(self):
+        """Test that StructuredLogger properly propagates context."""
+        from app.logging_config import StructuredLogger, StructuredFormatter
+        
+        # Create a logger with custom handler for testing
+        base_logger = logging.getLogger("test_context")
+        base_logger.handlers.clear()  # Remove existing handlers
+        
+        # Add a string stream handler with structured formatter
+        stream = StringIO()
+        handler = logging.StreamHandler(stream)
+        handler.setFormatter(StructuredFormatter())
+        base_logger.addHandler(handler)
+        base_logger.setLevel(logging.INFO)
+        
+        # Create structured logger with base context
+        structured_logger = StructuredLogger(base_logger, {"service": "test_service"})
+        
+        # Log with additional context
+        structured_logger.info("Test message", extra={
+            "user_id": "456",
+            "request_id": "req-789"
+        })
+        
+        # Get the logged output
+        log_output = stream.getvalue()
+        log_data = json.loads(log_output)
+        
+        # Verify context propagation
+        assert log_data["message"] == "Test message"
+        assert log_data["service"] == "test_service"  # Base context
+        assert log_data["user_id"] == "456"  # Extra context
+        assert log_data["request_id"] == "req-789"  # Extra context
+
+    def test_pii_redaction_in_formatter(self):
+        """Test that sensitive data is redacted from log messages."""
+        from app.logging_config import StructuredFormatter
+        
+        formatter = StructuredFormatter()
+        logger = logging.getLogger("test_logger")
+        
+        # Test SSN redaction
+        record = logger.makeRecord(
+            name="test_logger",
+            level=logging.INFO,
+            fn="test.py",
+            lno=10,
+            msg="User SSN is 123-45-6789 and credit card 4111111111111111",
+            args=(),
+            exc_info=None
+        )
+        
+        formatted_output = formatter.format(record)
+        log_data = json.loads(formatted_output)
+        
+        # Verify sensitive data is redacted
+        assert "[REDACTED]" in log_data["message"]
+        assert "123-45-6789" not in log_data["message"]
+        
+        # Test password field redaction
+        record.extra_fields = {
+            "user_password": "secret123",
+            "api_token": "abc123xyz",
+            "safe_field": "safe_value"
+        }
+        
+        formatted_output = formatter.format(record)
+        log_data = json.loads(formatted_output)
+        
+        # Verify field-level redaction
+        assert log_data["user_password"] == "[REDACTED]"
+        assert log_data["api_token"] == "[REDACTED]"
+        assert log_data["safe_field"] == "safe_value"
 
     def test_security_no_sensitive_data_logged(self, client, admin_token):
         """Test that sensitive data is not logged."""
@@ -147,19 +241,32 @@ class TestStructuredLogging:
             args, kwargs = call_args
             assert "extra" in kwargs or len(args) > 1
 
-    @pytest.mark.parametrize("log_level,should_log", [
-        (logging.DEBUG, False),  # Debug should not log in production
-        (logging.INFO, True),    # Info should log
-        (logging.WARNING, True), # Warning should log
-        (logging.ERROR, True),   # Error should log
-    ])
-    def test_log_levels_respected(self, log_level, should_log):
-        """Test that log levels are properly configured."""
+    def test_log_level_filtering(self):
+        """Test that log levels are properly filtered."""
         from app.logging_config import get_logger
         
-        logger = get_logger("test_module")
+        # Create a test logger with INFO level
+        base_logger = logging.getLogger("test_level_filter")
+        base_logger.handlers.clear()
+        base_logger.setLevel(logging.INFO)
         
-        # Test that logger can handle different log levels
-        with patch.object(logger.logger, 'log') as mock_log:
-            logger.log(log_level, "Test message")
-            assert mock_log.called
+        # Add a handler to capture logs
+        stream = StringIO()
+        handler = logging.StreamHandler(stream)
+        base_logger.addHandler(handler)
+        
+        logger = get_logger("test_level_filter")
+        logger.logger = base_logger  # Use our test logger
+        
+        # Log at different levels
+        logger.debug("Debug message")  # Should be filtered out
+        logger.info("Info message")   # Should be logged
+        logger.warning("Warning message")  # Should be logged
+        
+        # Check what was actually logged
+        log_output = stream.getvalue()
+        
+        # DEBUG should be filtered out, INFO and WARNING should be present
+        assert "Debug message" not in log_output
+        assert "Info message" in log_output
+        assert "Warning message" in log_output

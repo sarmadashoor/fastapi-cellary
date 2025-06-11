@@ -16,7 +16,7 @@ mq_uri = app_config.get_config().mq_uri
 logger.info(f"amqp_uri: {mq_uri}")
 
 
-class Config:
+class CeleryConfig:
     """
     https://docs.celeryproject.org/en/latest/userguide/configuration.html#configuration-and-defaults
     """
@@ -56,7 +56,7 @@ celery_app = Celery(
     broker=app_config.get_config().celery_broker_uri,
     include=task_modules,
 )
-celery_app.config_from_object(Config)
+celery_app.config_from_object(CeleryConfig)
 
 print(
     f">>> celery_app: {app_config.get_config().celery_backend_uri}, {app_config.get_config().celery_broker_uri}",

@@ -1,5 +1,5 @@
 from typing import Dict, Optional, Any, Literal
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class ResumeUploadResponse(BaseModel):
@@ -12,15 +12,16 @@ class ResumeUploadResponse(BaseModel):
     task_id: str = Field(
         ...,
         description="Unique identifier for the resume parsing task",
-        example="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+        json_schema_extra={"example": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"}
     )
 
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
             }
         }
+    )
 
 
 class ContactInfo(BaseModel):
@@ -29,27 +30,28 @@ class ContactInfo(BaseModel):
     name: Optional[str] = Field(
         None,
         description="Full name extracted from the resume",
-        example="John Doe"
+        json_schema_extra={"example": "John Doe"}
     )
     email: Optional[str] = Field(
         None,
         description="Email address found in the resume",
-        example="john.doe@example.com"
+        json_schema_extra={"example": "john.doe@example.com"}
     )
     phone: Optional[str] = Field(
         None,
         description="Phone number found in the resume",
-        example="(555) 123-4567"
+        json_schema_extra={"example": "(555) 123-4567"}
     )
 
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "name": "John Doe",
                 "email": "john.doe@example.com",
                 "phone": "(555) 123-4567"
             }
         }
+    )
 
 
 class ResumeParsingResult(BaseModel):
@@ -62,17 +64,17 @@ class ResumeParsingResult(BaseModel):
     file_type: str = Field(
         ...,
         description="MIME type of the processed file",
-        example="application/pdf"
+        json_schema_extra={"example": "application/pdf"}
     )
     character_count: int = Field(
         ...,
         description="Number of characters extracted from the resume",
-        example=2543
+        json_schema_extra={"example": 2543}
     )
     extracted_text: Optional[str] = Field(
         None,
         description="Full text content extracted from the resume",
-        example="John Doe\nSoftware Engineer\nExperience:\n- Python development..."
+        json_schema_extra={"example": "John Doe\nSoftware Engineer\nExperience:\n- Python development..."}
     )
     contact_info: Optional[ContactInfo] = Field(
         None,
@@ -81,11 +83,11 @@ class ResumeParsingResult(BaseModel):
     error: Optional[str] = Field(
         None,
         description="Error message if parsing failed",
-        example="Failed to extract text from PDF: file corrupted"
+        json_schema_extra={"example": "Failed to extract text from PDF: file corrupted"}
     )
 
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "status": "success",
                 "file_type": "application/pdf",
@@ -98,6 +100,7 @@ class ResumeParsingResult(BaseModel):
                 }
             }
         }
+    )
 
 
 class ResumeStatusResponse(BaseModel):
@@ -110,12 +113,12 @@ class ResumeStatusResponse(BaseModel):
     task_id: str = Field(
         ...,
         description="Unique identifier for the resume parsing task",
-        example="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+        json_schema_extra={"example": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"}
     )
     status: Literal["PENDING", "SUCCESS", "FAILURE", "RETRY", "REVOKED"] = Field(
         ...,
         description="Current status of the task processing",
-        example="SUCCESS"
+        json_schema_extra={"example": "SUCCESS"}
     )
     result: Optional[ResumeParsingResult] = Field(
         None,
@@ -124,11 +127,11 @@ class ResumeStatusResponse(BaseModel):
     error: Optional[str] = Field(
         None,
         description="Error message when status is FAILURE",
-        example="Task failed due to corrupted file"
+        json_schema_extra={"example": "Task failed due to corrupted file"}
     )
 
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "examples": [
                 {
                     "description": "Task completed successfully",
@@ -164,3 +167,4 @@ class ResumeStatusResponse(BaseModel):
                 }
             ]
         }
+    )

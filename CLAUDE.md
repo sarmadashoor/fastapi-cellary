@@ -15,6 +15,34 @@ This is a **production-ready FastAPI application template** with asynchronous ta
 ### 🔥 **Latest Session Enhancements (2025-06-11)**
 **Production-ready finalization with enterprise-grade logging and documentation:**
 
+### 🧪 **Test Suite Fixes & Deprecation Resolution (Continued Session)**
+**Comprehensive test stabilization and future-proofing:**
+
+#### **Immediate Test Fixes Completed**
+- **Structured Logging Tests**: Completely rewrote broken test suite with proper JSON validation
+  - Fixed mock assertions using StringIO for log capture
+  - Added comprehensive PII redaction testing  
+  - Implemented proper context propagation validation
+  - All 9 structured logging tests now passing with robust validation
+
+- **Pytest Configuration**: Resolved marker warnings by registering custom markers
+  - Added `backend/pytest.ini` with proper marker definitions
+  - Configured pytest for Docker environment compatibility
+  - Eliminated all pytest unknown marker warnings
+
+- **Deprecation Warnings**: Fixed all Pydantic v2 migration issues
+  - **datetime.utcnow()** → `datetime.now(timezone.utc)` in logging_config.py:23
+  - **Pydantic Config classes** → `model_config = ConfigDict(...)` for all models
+  - **Field `example` parameter** → `json_schema_extra={"example": ...}` in all Field declarations
+  - **Field `env` parameter** → `alias` for environment variable mappings in config.py
+  - **Celery Config class** → Renamed to `CeleryConfig` to avoid Pydantic conflicts
+
+#### **Code Quality Improvements**
+- **Type Safety**: Maintained full type annotations throughout deprecation fixes
+- **Backward Compatibility**: Ensured all changes maintain API compatibility
+- **Testing Robustness**: Enhanced test reliability with proper mocking and validation
+- **Zero Warnings**: Achieved completely clean test runs with no deprecation warnings
+
 #### 1. **Structured Logging Implementation**
 - **Enhanced Security**: Added `StructuredLogger` with PII redaction (SSN, passwords, tokens)
 - **JSON Format**: All logs now output structured JSON with contextual metadata

@@ -27,31 +27,31 @@ class Config(BaseSettings):
     """Configuration with secure environment variable handling."""
 
     # Authentication settings
-    admin_login: str = Field(default="admin", env="ADMIN_LOGIN", description="Admin login username")
-    admin_password: str = Field(default="admin", env="ADMIN_PASSWORD", description="Admin password")
+    admin_login: str = Field(default="admin", alias="ADMIN_LOGIN", description="Admin login username")
+    admin_password: str = Field(default="admin", alias="ADMIN_PASSWORD", description="Admin password")
     jwt_secret_key: str = Field(
         default="default_secret_key_change_in_production",
-        env="JWT_SECRET_KEY",
+        alias="JWT_SECRET_KEY",
         description="JWT signing secret",
     )
     jwt_algorithm: str = Field(default="HS256", description="JWT algorithm")
 
     # Database settings
-    db_database: str = Field(default=DB_DATABASE_DEFAULT, env="POSTGRES_DB")
-    db_user: str = Field(default=DB_USER_DEFAULT, env="POSTGRES_USER")
-    db_password: str = Field(default=DB_PASSWORD_DEFAULT, env="POSTGRES_PASSWORD")
-    db_host: str = Field(default=DB_HOST_DEFAUL, env="POSTGRES_HOST")
-    db_pool_size: int = Field(default=int(DB_POOL_SIZE_DEFAUL), env="DB_POOL_SIZE")
+    db_database: str = Field(default=DB_DATABASE_DEFAULT, alias="POSTGRES_DB")
+    db_user: str = Field(default=DB_USER_DEFAULT, alias="POSTGRES_USER")
+    db_password: str = Field(default=DB_PASSWORD_DEFAULT, alias="POSTGRES_PASSWORD")
+    db_host: str = Field(default=DB_HOST_DEFAUL, alias="POSTGRES_HOST")
+    db_pool_size: int = Field(default=int(DB_POOL_SIZE_DEFAUL), alias="DB_POOL_SIZE")
 
     # Message queue settings
-    mq_user: str = Field(default="guest", env="AMQP_USERNAME", description="Message queue username")
+    mq_user: str = Field(default="guest", alias="AMQP_USERNAME", description="Message queue username")
     mq_password: str = Field(
         default="guest",
-        env="AMQP_PASSWORD",
+        alias="AMQP_PASSWORD",
         description="Message queue password",
     )
-    mq_host: str = Field(default="localhost", env="AMQP_HOST", description="Message queue host")
-    mq_port: str = Field(default="6379", env="AMQP_PORT", description="Message queue port")
+    mq_host: str = Field(default="localhost", alias="AMQP_HOST", description="Message queue host")
+    mq_port: str = Field(default="6379", alias="AMQP_PORT", description="Message queue port")
 
     model_config = {
         "env_file": ".env",

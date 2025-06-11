@@ -3,7 +3,7 @@ import logging
 import sys
 from typing import Any, Dict, Optional
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 import re
 
 
@@ -20,7 +20,7 @@ class StructuredFormatter(logging.Formatter):
     def format(self, record: logging.LogRecord) -> str:
         """Format log record as JSON with security filtering."""
         log_data: Dict[str, Any] = {
-            'timestamp': datetime.utcnow().isoformat(),
+            'timestamp': datetime.now(timezone.utc).isoformat(),
             'level': record.levelname,
             'logger': record.name,
             'message': self._sanitize_message(record.getMessage()),
