@@ -1,0 +1,5 @@
+INFO     app.workers.resume_parser:resume_parser.py:229 Resume parsing task started
+INFO     app.workers.resume_parser:resume_parser.py:299 Resume parsing completed successfully
+INFO     celery.app.trace:trace.py:128 Task app.workers.resume_parser.parse_resume_task[5521d46c-95d8-47c8-8906-45239c9dc8d8] succeeded in 0.04317155100000036s: {'status': 'success', 'file_type': 'application/pdf', 'character_count': 61, 'extracted_text': 'John Doe
+Software Engineer
+Experience with Python and FastAPI', 'contact_info': {'name': 'John Doe', 'email': None, 'phone': None}}

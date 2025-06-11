@@ -1,0 +1,16 @@
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 422
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 422 Unprocessable Entity"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: None
+INFO     root:client.py:88 <<- 422
+INFO     root:client.py:91 {'message': "[{'input': b'login=dev_admin&password=dev_admin_password',\n"
+            "  'loc': ('body',),\n"
+            "  'msg': 'Input should be a valid dictionary or object to extract "
+            "fields from',\n"
+            "  'type': 'model_attributes_type'}]\n"
+            "b'login=dev_admin&password=dev_admin_password'"}

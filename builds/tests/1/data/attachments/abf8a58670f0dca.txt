@@ -1,0 +1,3 @@
+INFO     app.workers.resume_parser:resume_parser.py:229 Resume parsing task started
+ERROR    app.workers.resume_parser:resume_parser.py:326 Resume parsing failed with unexpected error
+INFO     celery.app.trace:trace.py:128 Task app.workers.resume_parser.parse_resume_task[22aa959d-1da9-4898-b844-c2cdb730cb2d] succeeded in 0.1360582860000079s: {'status': 'error', 'error': 'Failed to parse resume: Processing timeout', 'file_type': 'application/pdf', 'character_count': 0}

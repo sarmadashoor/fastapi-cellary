@@ -1,0 +1,79 @@
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 422
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 422 Unprocessable Entity"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {}
+INFO     root:client.py:88 <<- 422
+INFO     root:client.py:91 {'message': "[{'input': {},\n"
+            "  'loc': ('body', 'login'),\n"
+            "  'msg': 'Field required',\n"
+            "  'type': 'missing'},\n"
+            " {'input': {},\n"
+            "  'loc': ('body', 'password'),\n"
+            "  'msg': 'Field required',\n"
+            "  'type': 'missing'}]\n"
+            '{}'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 422
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 422 Unprocessable Entity"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'admin'}
+INFO     root:client.py:88 <<- 422
+INFO     root:client.py:91 {'message': "[{'input': {'login': 'admin'},\n"
+            "  'loc': ('body', 'password'),\n"
+            "  'msg': 'Field required',\n"
+            "  'type': 'missing'}]\n"
+            "{'login': 'admin'}"}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 422
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 422 Unprocessable Entity"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'password': 'admin'}
+INFO     root:client.py:88 <<- 422
+INFO     root:client.py:91 {'message': "[{'input': {'password': 'admin'},\n"
+            "  'loc': ('body', 'login'),\n"
+            "  'msg': 'Field required',\n"
+            "  'type': 'missing'}]\n"
+            "{'password': 'admin'}"}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 422
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 422 Unprocessable Entity"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': None, 'password': 'admin'}
+INFO     root:client.py:88 <<- 422
+INFO     root:client.py:91 {'message': "[{'input': None,\n"
+            "  'loc': ('body', 'login'),\n"
+            "  'msg': 'Input should be a valid string',\n"
+            "  'type': 'string_type'}]\n"
+            "{'login': None, 'password': 'admin'}"}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 422
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 422 Unprocessable Entity"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'admin', 'password': None}
+INFO     root:client.py:88 <<- 422
+INFO     root:client.py:91 {'message': "[{'input': None,\n"
+            "  'loc': ('body', 'password'),\n"
+            "  'msg': 'Input should be a valid string',\n"
+            "  'type': 'string_type'}]\n"
+            "{'login': 'admin', 'password': None}"}

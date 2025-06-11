@@ -1,0 +1,2 @@
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected

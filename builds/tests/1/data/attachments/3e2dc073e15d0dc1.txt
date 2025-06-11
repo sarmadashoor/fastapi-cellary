@@ -1,0 +1,10 @@
+WARNING  backend.app.tasks.security:security.py:84 CELERY_SECURITY_KEY not set - task signature validation disabled
+INFO     celery.worker.consumer.connection:connection.py:22 Connected to memory://localhost//
+INFO     celery.app.trace:trace.py:128 Task celery.ping[b254903c-b0c9-4f67-be15-a68bd41b9977] succeeded in 0.05795331900000633s: 'pong'
+WARNING  backend.app.tasks.security:security.py:84 CELERY_SECURITY_KEY not set - task signature validation disabled
+INFO     root:test_celery_boilerplate.py:24 Waiting for task..
+INFO     root:test_celery_boilerplate.py:24 Waiting for task..
+INFO     root:test_celery_boilerplate.py:24 Waiting for task..
+INFO     root:test_celery_boilerplate.py:24 Waiting for task..
+INFO     celery.worker.strategy:strategy.py:161 Task tasks.dummy[3d306433-5509-41b9-8107-cfe5b7f3db87] received
+INFO     celery.app.trace:trace.py:128 Task tasks.dummy[3d306433-5509-41b9-8107-cfe5b7f3db87] succeeded in 0.07557657699999254s: 33

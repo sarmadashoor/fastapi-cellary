@@ -1,0 +1,7 @@
+WARNING  app.validation.file_validation:file_validation.py:392 Unsupported file type attempted upload
+WARNING  app.validation.file_validation:file_validation.py:392 Unsupported file type attempted upload
+WARNING  app.validation.file_validation:file_validation.py:392 Unsupported file type attempted upload
+WARNING  app.validation.file_validation:file_validation.py:392 Unsupported file type attempted upload
+WARNING  app.validation.file_validation:file_validation.py:392 Unsupported file type attempted upload
+WARNING  app.validation.file_validation:file_validation.py:392 Unsupported file type attempted upload
+WARNING  app.validation.file_validation:file_validation.py:392 Unsupported file type attempted upload

@@ -1,0 +1,3 @@
+WARNING  app.validation.rate_limiting:rate_limiting.py:354 Client blocked: Test block
+WARNING  app.observability.metrics:metrics.py:221 Security event: client_blocked
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected

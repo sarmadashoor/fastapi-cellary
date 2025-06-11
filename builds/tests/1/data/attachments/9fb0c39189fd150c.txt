@@ -1,0 +1,16 @@
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+ERROR    app.api.v1.auth.get_token:get_token.py:96 Plaintext password detected - security risk
+WARNING  app.api.v1.auth.get_token:get_token.py:108 Authentication succeeded with plaintext password
+INFO     app.auth.security_hardening:security_hardening.py:229 Cleared failed attempts after successful authentication
+ERROR    app.api.v1.auth.get_token:get_token.py:178 Weak JWT secret detected
+ERROR    app.middleware.observability:observability.py:79 Request failed: POST /api/auth
+ERROR    app.middleware.rate_limiting:rate_limiting.py:290 Error in advanced rate limiting middleware: 'datetime.datetime' object cannot be interpreted as an integer
+WARNING  app.observability.metrics:metrics.py:221 Security event: rate_limiting_failure
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+ERROR    root:exception_handlers.py:22 Unhandled exception 'datetime.datetime' object cannot be interpreted as an integer
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 500 Internal Server Error"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'dev_admin', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 500
+INFO     root:client.py:91 {'message': "'datetime.datetime' object cannot be interpreted as an integer"}

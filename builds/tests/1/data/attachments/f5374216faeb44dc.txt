@@ -1,0 +1,1 @@
+WARNING  app.tasks.security:security.py:84 CELERY_SECURITY_KEY not set - task signature validation disabled

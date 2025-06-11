@@ -1,0 +1,5 @@
+INFO     app.workers.resume_parser:resume_parser.py:229 Resume parsing task started
+INFO     app.workers.resume_parser:resume_parser.py:299 Resume parsing completed successfully
+INFO     celery.app.trace:trace.py:128 Task app.workers.resume_parser.parse_resume_task[b591729c-3ed9-4b80-a1b5-d04fff6e28dc] succeeded in 0.001845649000003391s: {'status': 'success', 'file_type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'character_count': 58, 'extracted_text': 'Jane Smith
+Data Scientist
+Skills: Python, Machine Learning', 'contact_info': {'name': 'Jane Smith', 'email': None, 'phone': None}}

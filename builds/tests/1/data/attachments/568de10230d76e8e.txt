@@ -1,0 +1,11 @@
+INFO     app.middleware.rate_limiting:rate_limiting.py:215 Rate limit exceeded: testclient on /api/resumes/upload
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/resumes/upload "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/resumes/upload
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: None
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Rate limit exceeded. Please slow down your requests.',
+ 'limit': 10,
+ 'reset_time': 1749666580,
+ 'rule': 'upload_moderate',
+ 'window': 300}

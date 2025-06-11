@@ -1,0 +1,1437 @@
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '0', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '6OnuJ', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 't5f', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'S', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'AH', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'e', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '9ejx5S', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'KXyjPl', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'x', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'PN', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.api.v1.auth.get_token:get_token.py:70 Applying progressive delay for failed attempts
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '0', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'm', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'ivF4rbm3cK', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'uYWvb', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '0e', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'HS256', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'DBzQGRULXc', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'rl38flnuWB', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'px', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '5dS', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'C', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'La', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '45', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'KEvqtuY', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'iIFlS', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'Ud1UuQ8TSwfQoaT0A', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'JFpt9EG9Zwk6Yl', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'L4lJz9HwbzP0', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'rule', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'f', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'nb', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '6y', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'P6PqH0nC', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'ETceC', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'pnNHOsPvp', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'msaK0eoWBu', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'fJ7', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'Wgb', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'khBG', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'zN', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'm2', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'args', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'kcCIooFnl58PgBni6cPXVn', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'rr', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'j5dcU8U', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '4eTSfuz9wL', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '3x4H', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'a', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '3uza', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '7yar3SD7', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'ugD', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'IBht2c', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'n', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '1WDuLxtaF', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'iCT', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'H7heM', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'y', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'qjXmQLj', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'w3', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'lsAKW8Q6mYK', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '4YH4evEt', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'NkVd', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'DmrgeV', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'B4NoC46r4Bt', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'e9h', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'wGD', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'snl', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'KGAhZIg4', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'x5Y', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'Iv', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'nil', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '0Tc', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'HbAp3eEBY', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'yCHDLvlSFq', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'nKggQV7Dh4WeDa', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '18yM', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'j', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'd4', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'Kk', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'yHUhwj', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'Drvy8ghR1LXo', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'fv', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'CRqHHugg6LEWdq', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'b92wmXGSJ4', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'iH', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'HF8Mw', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'j3VNTLl', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'gI', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'Vc', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '2YJSC', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'QDih', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '6lAdxGBPWehbBDNNuwo', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'T7mu28tf3H', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'jZ', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'CFbl', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'DQzT', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'ITmvx8igV4d2PRCZAfS', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'd6Gc', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'OZ', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'ma', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'Hl9WwP6j6RKfAx', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'l', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'p6xfo', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'tegWGcqp', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '202Al', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'JgigeZjhFL', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'vUs', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'wOKkNGPTO', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'BfVH', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'DwbIk', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 429
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 429 Too Many Requests"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': '0', 'password': 'dev_admin_password'}
+INFO     root:client.py:88 <<- 429
+INFO     root:client.py:91 {'detail': 'Too many authentication attempts from this IP address'}

@@ -1,0 +1,12 @@
+INFO     app.middleware.observability:observability.py:44 Request started: GET /api/resumes/status/test-task-id
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: GET /api/resumes/status/test-task-id - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/api/resumes/status/test-task-id "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> GET /api/resumes/status/test-task-id
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Not authenticated'}

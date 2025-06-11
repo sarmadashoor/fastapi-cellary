@@ -1,0 +1,9 @@
+INFO     app.workers.resume_parser:resume_parser.py:229 Resume parsing task started
+INFO     app.workers.resume_parser:resume_parser.py:299 Resume parsing completed successfully
+INFO     celery.app.trace:trace.py:128 Task app.workers.resume_parser.parse_resume_task[ceec8c17-086a-47f0-b21b-0aa953609c26] succeeded in 0.0040206120000050305s: {'status': 'success', 'file_type': 'application/pdf', 'character_count': 171, 'extracted_text': '
+            Jane Smith
+            jane@work.com
+            Personal: jane.smith@gmail.com
+            Work: (555) 987-6543
+            Mobile: 555.123.4567
+            ', 'contact_info': {'name': 'Jane Smith', 'email': 'jane@work.com', 'phone': '(555) 987-6543'}}

@@ -1,0 +1,2 @@
+ERROR    app.db.security:security.py:228 Failed to validate database security
+INFO     database.security:security.py:233 Database security validation completed

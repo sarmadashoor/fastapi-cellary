@@ -1,0 +1,10 @@
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+INFO     app.middleware.observability:observability.py:44 Request started: GET /api/resumes/status/test-task-123
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: GET /api/resumes/status/test-task-123 - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.rate_limiting:rate_limiting.py:274 Request from elevated threat client: testclient
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/api/resumes/status/test-task-123 "HTTP/1.1 401 Unauthorized"

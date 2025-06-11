@@ -1,0 +1,3 @@
+INFO     app.workers.resume_parser:resume_parser.py:229 Resume parsing task started
+INFO     app.workers.resume_parser:resume_parser.py:299 Resume parsing completed successfully
+INFO     celery.app.trace:trace.py:128 Task app.workers.resume_parser.parse_resume_task[204a4dc1-3857-4d08-97ce-bd940b10730d] succeeded in 0.0017780219999963265s: {'status': 'success', 'file_type': 'application/pdf', 'character_count': 19, 'extracted_text': 'Test resume content', 'contact_info': {'name': 'Test resume content', 'email': None, 'phone': None}}

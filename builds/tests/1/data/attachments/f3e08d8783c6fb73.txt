@@ -1,0 +1,20 @@
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/runner/work/fastapi-cellary/fastapi-cellary/.venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO     app.middleware.observability:observability.py:44 Request started: POST /api/auth
+WARNING  app.auth.security_hardening:security_hardening.py:163 Failed authentication attempt
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.middleware.observability:observability.py:123 Request completed: POST /api/auth - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/auth "HTTP/1.1 401 Unauthorized"
+INFO     root:client.py:77 ->> POST /api/auth
+INFO     root:client.py:83 Query params: None
+INFO     root:client.py:86 Request body: {'login': 'admin', 'password': 'SecurePassword123!'}
+INFO     root:client.py:88 <<- 401
+INFO     root:client.py:91 {'detail': 'Invalid credentials'}

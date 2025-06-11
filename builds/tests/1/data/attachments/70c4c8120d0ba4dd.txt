@@ -1,0 +1,2 @@
+INFO     test_level_filter:test_structured_logging.py:263 Info message
+WARNING  test_level_filter:test_structured_logging.py:264 Warning message

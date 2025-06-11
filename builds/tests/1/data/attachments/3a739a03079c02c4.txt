@@ -1,0 +1,1 @@
+ERROR    app.api.v1.auth.get_token:get_token.py:178 Weak JWT secret detected

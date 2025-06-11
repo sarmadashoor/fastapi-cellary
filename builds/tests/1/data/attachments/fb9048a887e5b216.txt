@@ -1,0 +1,1 @@
+INFO     app.db.security:security.py:276 Added SSL encryption to database URL

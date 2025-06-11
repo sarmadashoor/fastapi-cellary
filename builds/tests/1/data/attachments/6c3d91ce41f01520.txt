@@ -1,0 +1,1 @@
+ERROR    app.validation.file_validation:file_validation.py:205 Executable file detected disguised as document

@@ -1,0 +1,3 @@
+INFO     app.workers.resume_parser:resume_parser.py:229 Resume parsing task started
+ERROR    app.workers.resume_parser:resume_parser.py:326 Resume parsing failed with unexpected error
+INFO     celery.app.trace:trace.py:128 Task app.workers.resume_parser.parse_resume_task[04b61fa6-ac62-4349-bbe8-95dd493f878c] succeeded in 0.0011742340000040485s: {'status': 'error', 'error': 'Failed to parse resume: PDF parsing failed', 'file_type': 'application/pdf', 'character_count': 0}

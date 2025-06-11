@@ -1,0 +1,300 @@
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected
+INFO     app.validation.rate_limiting:rate_limiting.py:552 Threat escalated for client
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+ERROR    app.observability.metrics:metrics.py:382 High volume of security events detected

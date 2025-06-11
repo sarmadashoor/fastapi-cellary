@@ -1,0 +1,6 @@
+INFO     app.middleware.observability:observability.py:44 Request started: GET /api/resumes/status/model-validation-task
+INFO     app.observability.metrics:metrics.py:187 HTTP request completed
+WARNING  app.observability.metrics:metrics.py:221 Security event: auth_failure
+INFO     app.middleware.observability:observability.py:123 Request completed: GET /api/resumes/status/model-validation-task - 401
+WARNING  app.observability.metrics:metrics.py:221 Security event: request_analyzed
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/api/resumes/status/model-validation-task "HTTP/1.1 401 Unauthorized"
