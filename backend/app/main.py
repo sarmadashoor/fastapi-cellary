@@ -7,6 +7,7 @@ import logging
 from typing import Any, Callable
 
 import app.config as app_config  # to not shadow global app var with FastAPI app
+from app.logging_config import configure_logging, get_logger
 import app.db.session as app_session
 import sqlalchemy.exc
 import sqlalchemy.orm.exc
@@ -25,7 +26,9 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 
-log = logging.getLogger()
+# Configure structured logging
+configure_logging(log_level="INFO")
+logger = get_logger(__name__)
 
 
 app = FastAPI(
@@ -91,7 +94,16 @@ async def db_session_middleware(
         request.state.db = app_session.get_session(app_config.get_config())
         response = await call_next(request)
     except Exception as e:
-        logging.exception(f"Cannot get session in middleware: {e}")
+        logger.error(
+            "Database session middleware error",
+            extra={
+                "error_type": type(e).__name__,
+                "error_message": str(e),
+                "request_path": request.url.path,
+                "request_method": request.method,
+                "event": "db_session_error"
+            }
+        )
         raise
     finally:
         request.state.db.close()

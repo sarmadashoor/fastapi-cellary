@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Upload Demo - FastAPI + Celery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #2d3748;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 16px;
+        }
+
+        .upload-section {
+            margin-bottom: 30px;
+        }
+
+        .upload-area {
+            border: 2px dashed #cbd5e0;
+            border-radius: 8px;
+            padding: 40px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-area:hover, .upload-area.drag-over {
+            border-color: #667eea;
+            background-color: #f7fafc;
+        }
+
+        .upload-area.uploading {
+            border-color: #fbd38d;
+            background-color: #fffbf0;
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            color: #a0aec0;
+            margin-bottom: 16px;
+        }
+
+        .upload-text {
+            color: #4a5568;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .upload-subtext {
+            color: #a0aec0;
+            font-size: 14px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .auth-section {
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #4a5568;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover:not(:disabled) {
+            background: #5a67d8;
+            transform: translateY(-1px);
+        }
+
+        .btn:disabled {
+            background: #a0aec0;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .status-section.show {
+            display: block;
+        }
+
+        .status-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .status-item:last-child {
+            border-bottom: none;
+        }
+
+        .status-label {
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .status-value {
+            color: #2d3748;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+        }
+
+        .status-pending {
+            color: #f6ad55;
+        }
+
+        .status-success {
+            color: #48bb78;
+        }
+
+        .status-error {
+            color: #f56565;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #667eea;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .results-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .results-section.show {
+            display: block;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+
+        .contact-info h4 {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .contact-item {
+            margin-bottom: 8px;
+            color: #4a5568;
+        }
+
+        .text-preview {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 12px;
+            color: #4a5568;
+            white-space: pre-wrap;
+        }
+
+        .error-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: #fed7d7;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .error-section.show {
+            display: block;
+        }
+
+        .api-info {
+            background: #edf2f7;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #4a5568;
+        }
+
+        .api-info code {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .upload-area {
+                padding: 30px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Resume Upload Demo</h1>
+            <p>Upload and process resume files with FastAPI + Celery backend</p>
+        </div>
+
+        <!-- Authentication Section -->
+        <div class="auth-section">
+            <div class="input-group">
+                <label for="api-url">API Base URL</label>
+                <input type="text" id="api-url" value="http://localhost:8000" placeholder="http://localhost:8000">
+            </div>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" value="admin" placeholder="admin">
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" value="admin" placeholder="admin">
+            </div>
+            <button class="btn" onclick="authenticate()">
+                🔐 Authenticate
+            </button>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <div class="upload-area" id="upload-area" onclick="document.getElementById('file-input').click()">
+                <div class="upload-icon">📄</div>
+                <div class="upload-text">Click to upload or drag and drop</div>
+                <div class="upload-subtext">PDF or DOCX files only (max 5MB)</div>
+            </div>
+            <input type="file" id="file-input" class="file-input" accept=".pdf,.docx" onchange="handleFileSelect(event)">
+        </div>
+
+        <!-- Status Section -->
+        <div class="status-section" id="status-section">
+            <div class="status-title">Processing Status</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Task ID:</span>
+                <span class="status-value" id="task-id">-</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Status:</span>
+                <span class="status-value" id="task-status">-</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">File Type:</span>
+                <span class="status-value" id="file-type">-</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Characters:</span>
+                <span class="status-value" id="character-count">-</span>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section" id="results-section">
+            <h3>✅ Processing Complete!</h3>
+            <div class="contact-info">
+                <h4>Extracted Contact Information</h4>
+                <div class="contact-item"><strong>Name:</strong> <span id="contact-name">Not found</span></div>
+                <div class="contact-item"><strong>Email:</strong> <span id="contact-email">Not found</span></div>
+                <div class="contact-item"><strong>Phone:</strong> <span id="contact-phone">Not found</span></div>
+            </div>
+            <div class="text-preview" id="text-preview"></div>
+        </div>
+
+        <!-- Error Section -->
+        <div class="error-section" id="error-section">
+            <h3>❌ Processing Failed</h3>
+            <p id="error-message"></p>
+        </div>
+
+        <!-- API Information -->
+        <div class="api-info">
+            <strong>API Endpoints:</strong><br>
+            • POST <code>/api/auth</code> - Authenticate<br>
+            • POST <code>/api/resumes/upload</code> - Upload resume<br>
+            • GET <code>/api/resumes/status/{task_id}</code> - Check status<br>
+            • GET <code>/docs</code> - API documentation
+        </div>
+    </div>
+
+    <script>
+        let authToken = null;
+        let currentTaskId = null;
+        let statusInterval = null;
+
+        // API Configuration
+        function getApiUrl() {
+            return document.getElementById('api-url').value || 'http://localhost:8000';
+        }
+
+        // Authentication
+        async function authenticate() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const apiUrl = getApiUrl();
+
+            try {
+                const response = await fetch(`${apiUrl}/api/auth`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        login: username,
+                        password: password
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    authToken = data.token;
+                    alert('✅ Authentication successful!');
+                } else {
+                    const error = await response.json();
+                    alert(`❌ Authentication failed: ${error.detail}`);
+                }
+            } catch (error) {
+                alert(`❌ Authentication error: ${error.message}`);
+            }
+        }
+
+        // File Upload Handling
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                uploadFile(file);
+            }
+        }
+
+        // Drag and Drop
+        const uploadArea = document.getElementById('upload-area');
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('drag-over');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('drag-over');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                uploadFile(files[0]);
+            }
+        });
+
+        // File Upload
+        async function uploadFile(file) {
+            if (!authToken) {
+                alert('❌ Please authenticate first');
+                return;
+            }
+
+            // Validate file type
+            const allowedTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('❌ Only PDF and DOCX files are allowed');
+                return;
+            }
+
+            // Validate file size (5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('❌ File size must be less than 5MB');
+                return;
+            }
+
+            uploadArea.classList.add('uploading');
+            hideAllSections();
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const apiUrl = getApiUrl();
+                const response = await fetch(`${apiUrl}/api/resumes/upload`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    currentTaskId = data.task_id;
+                    showStatusSection();
+                    startStatusPolling();
+                } else {
+                    const error = await response.json();
+                    showError(`Upload failed: ${error.detail}`);
+                }
+            } catch (error) {
+                showError(`Upload error: ${error.message}`);
+            } finally {
+                uploadArea.classList.remove('uploading');
+            }
+        }
+
+        // Status Polling
+        function startStatusPolling() {
+            if (statusInterval) {
+                clearInterval(statusInterval);
+            }
+
+            // Initial check
+            checkTaskStatus();
+
+            // Poll every 2 seconds
+            statusInterval = setInterval(checkTaskStatus, 2000);
+        }
+
+        async function checkTaskStatus() {
+            if (!currentTaskId || !authToken) {
+                return;
+            }
+
+            try {
+                const apiUrl = getApiUrl();
+                const response = await fetch(`${apiUrl}/api/resumes/status/${currentTaskId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    updateStatus(data);
+
+                    if (data.status === 'SUCCESS') {
+                        clearInterval(statusInterval);
+                        showResults(data.result);
+                    } else if (data.status === 'FAILURE') {
+                        clearInterval(statusInterval);
+                        showError(data.error || 'Task failed');
+                    }
+                } else {
+                    const error = await response.json();
+                    showError(`Status check failed: ${error.detail}`);
+                    clearInterval(statusInterval);
+                }
+            } catch (error) {
+                showError(`Status check error: ${error.message}`);
+                clearInterval(statusInterval);
+            }
+        }
+
+        // UI Updates
+        function updateStatus(data) {
+            document.getElementById('task-id').textContent = data.task_id;
+            
+            const statusElement = document.getElementById('task-status');
+            statusElement.textContent = data.status;
+            statusElement.className = `status-value status-${data.status.toLowerCase()}`;
+
+            if (data.result) {
+                document.getElementById('file-type').textContent = data.result.file_type || '-';
+                document.getElementById('character-count').textContent = data.result.character_count || '-';
+            }
+
+            // Update progress bar
+            const progressFill = document.getElementById('progress-fill');
+            switch (data.status) {
+                case 'PENDING':
+                    progressFill.style.width = '30%';
+                    break;
+                case 'SUCCESS':
+                    progressFill.style.width = '100%';
+                    break;
+                case 'FAILURE':
+                    progressFill.style.width = '100%';
+                    progressFill.style.background = '#f56565';
+                    break;
+                default:
+                    progressFill.style.width = '60%';
+            }
+        }
+
+        function showResults(result) {
+            const resultsSection = document.getElementById('results-section');
+            resultsSection.classList.add('show');
+
+            // Update contact information
+            if (result.contact_info) {
+                document.getElementById('contact-name').textContent = result.contact_info.name || 'Not found';
+                document.getElementById('contact-email').textContent = result.contact_info.email || 'Not found';
+                document.getElementById('contact-phone').textContent = result.contact_info.phone || 'Not found';
+            }
+
+            // Update text preview
+            const textPreview = document.getElementById('text-preview');
+            if (result.extracted_text) {
+                textPreview.textContent = result.extracted_text.substring(0, 1000) + 
+                    (result.extracted_text.length > 1000 ? '\n\n... (text truncated)' : '');
+            }
+        }
+
+        function showError(message) {
+            const errorSection = document.getElementById('error-section');
+            document.getElementById('error-message').textContent = message;
+            errorSection.classList.add('show');
+        }
+
+        function showStatusSection() {
+            document.getElementById('status-section').classList.add('show');
+        }
+
+        function hideAllSections() {
+            document.getElementById('status-section').classList.remove('show');
+            document.getElementById('results-section').classList.remove('show');
+            document.getElementById('error-section').classList.remove('show');
+            
+            // Reset progress bar
+            const progressFill = document.getElementById('progress-fill');
+            progressFill.style.width = '0%';
+            progressFill.style.background = '#667eea';
+        }
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (statusInterval) {
+                clearInterval(statusInterval);
+            }
+        });
+    </script>
+</body>
+</html>

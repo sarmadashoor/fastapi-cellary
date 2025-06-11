@@ -7,12 +7,16 @@ extracting text content, and generating metadata for further processing.
 
 import io
 import re
+import time
 from typing import Dict, Any, Optional
 
 from celery import current_task
-from fastapi.logger import logger
 
 from app.celery_app import celery_app
+from app.logging_config import get_logger
+
+# Configure structured logger
+logger = get_logger(__name__)
 
 # Import PDF and DOCX libraries with graceful fallback for testing
 try:
@@ -56,7 +60,15 @@ def extract_text_from_pdf(file_content: bytes) -> str:
         
         return "\n".join(text_content)
     except Exception as e:
-        logger.error(f"Failed to extract text from PDF: {e}")
+        logger.error(
+            "Failed to extract text from PDF",
+            extra={
+                "error_type": type(e).__name__,
+                "error_message": str(e),
+                "event": "pdf_extraction_failed",
+                "file_size_bytes": len(file_content)
+            }
+        )
         raise
 
 
@@ -86,7 +98,15 @@ def extract_text_from_docx(file_content: bytes) -> str:
         
         return "\n".join(text_content)
     except Exception as e:
-        logger.error(f"Failed to extract text from DOCX: {e}")
+        logger.error(
+            "Failed to extract text from DOCX",
+            extra={
+                "error_type": type(e).__name__,
+                "error_message": str(e),
+                "event": "docx_extraction_failed",
+                "file_size_bytes": len(file_content)
+            }
+        )
         raise
 
 
@@ -204,15 +224,35 @@ def parse_resume_task(self, file_content: bytes, file_type: str) -> Dict[str, An
         - error: Error message (if failed)
     """
     task_id = current_task.request.id if current_task else "unknown"
+    start_time = time.time()
     
-    logger.info(f"Starting resume parsing for task {task_id}")
-    logger.info(f"File type: {file_type}")
-    logger.info(f"File size: {len(file_content)} bytes")
+    logger.info(
+        "Resume parsing task started",
+        extra={
+            "task_id": task_id,
+            "file_type": file_type,
+            "file_size_bytes": len(file_content),
+            "file_size_mb": round(len(file_content) / (1024 * 1024), 2),
+            "event": "task_started",
+            "task_type": "resume_parsing"
+        }
+    )
     
     # Validate input
     if not file_content:
         error_msg = "Empty file content provided"
-        logger.error(f"Task {task_id}: {error_msg}")
+        processing_time_ms = round((time.time() - start_time) * 1000, 2)
+        
+        logger.error(
+            "Resume parsing failed - empty file content",
+            extra={
+                "task_id": task_id,
+                "error_message": error_msg,
+                "processing_time_ms": processing_time_ms,
+                "event": "task_failed",
+                "error_category": "validation_error"
+            }
+        )
         return {
             "status": "error",
             "error": error_msg,
@@ -228,7 +268,19 @@ def parse_resume_task(self, file_content: bytes, file_type: str) -> Dict[str, An
             extracted_text = extract_text_from_docx(file_content)
         else:
             error_msg = f"Unsupported file format: {file_type}"
-            logger.error(f"Task {task_id}: {error_msg}")
+            processing_time_ms = round((time.time() - start_time) * 1000, 2)
+            
+            logger.error(
+                "Resume parsing failed - unsupported file format",
+                extra={
+                    "task_id": task_id,
+                    "file_type": file_type,
+                    "error_message": error_msg,
+                    "processing_time_ms": processing_time_ms,
+                    "event": "task_failed",
+                    "error_category": "unsupported_format"
+                }
+            )
             return {
                 "status": "error",
                 "error": error_msg,
@@ -238,15 +290,26 @@ def parse_resume_task(self, file_content: bytes, file_type: str) -> Dict[str, An
         
         # Calculate metadata
         character_count = len(extracted_text)
+        processing_time_ms = round((time.time() - start_time) * 1000, 2)
         
         # Extract contact information
         contact_info = extract_contact_info(extracted_text)
+        contact_fields_found = [field for field, value in contact_info.items() if value]
         
-        logger.info(f"Resume parsing completed successfully for task {task_id}")
-        logger.info(f"File type: {file_type}")
-        logger.info(f"Character count: {character_count}")
-        logger.info(f"Extracted contact info: {contact_info}")
-        logger.info(f"Text preview: {extracted_text[:100]}..." if len(extracted_text) > 100 else extracted_text)
+        logger.info(
+            "Resume parsing completed successfully",
+            extra={
+                "task_id": task_id,
+                "file_type": file_type,
+                "character_count": character_count,
+                "processing_time_ms": processing_time_ms,
+                "contact_fields_found": contact_fields_found,
+                "contact_info_extracted": len(contact_fields_found) > 0,
+                "text_preview_length": min(100, len(extracted_text)),
+                "event": "task_completed",
+                "task_status": "success"
+            }
+        )
         
         return {
             "status": "success",
@@ -258,7 +321,20 @@ def parse_resume_task(self, file_content: bytes, file_type: str) -> Dict[str, An
         
     except Exception as e:
         error_msg = f"Failed to parse resume: {str(e)}"
-        logger.error(f"Task {task_id}: {error_msg}")
+        processing_time_ms = round((time.time() - start_time) * 1000, 2)
+        
+        logger.error(
+            "Resume parsing failed with unexpected error",
+            extra={
+                "task_id": task_id,
+                "file_type": file_type,
+                "error_type": type(e).__name__,
+                "error_message": error_msg,
+                "processing_time_ms": processing_time_ms,
+                "event": "task_failed",
+                "error_category": "processing_error"
+            }
+        )
         return {
             "status": "error",
             "error": error_msg,

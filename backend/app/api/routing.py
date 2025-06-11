@@ -7,19 +7,27 @@ from fastapi import APIRouter
 TAGS = [
     {
         "name": "tests",
-        "description": "Requests to test the service health.",
+        "description": "Service health and status endpoints for monitoring and testing.",
     },
     {
         "name": "security",
-        "description": "JWT auth",
+        "description": "Authentication and authorization endpoints using JWT tokens.",
         "externalDocs": {
-            "description": "JWT auth summary",
-            "url": "https://example.com",
+            "description": "JWT Authentication Guide",
+            "url": "https://jwt.io/introduction/",
         },
     },
     {
         "name": "resumes",
-        "description": "Resume upload and processing",
+        "description": "Resume processing endpoints for file upload, text extraction, and status tracking.",
+    },
+    {
+        "name": "Resume Processing",
+        "description": "Complete resume processing workflow including upload, parsing, and result retrieval.",
+    },
+    {
+        "name": "words",
+        "description": "Word processing and text analysis endpoints for map-reduce operations.",
     },
 ]
 
