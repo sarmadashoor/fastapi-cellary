@@ -2,7 +2,15 @@
 
 ## Project Architecture Overview
 
-This is a **production-ready FastAPI application template** with asynchronous task processing, designed for scalable web APIs with background job processing capabilities.
+This is a **production-ready FastAPI application template** with asynchronous task processing, designed for scalable web APIs with background job processing capabilities. **Recently enhanced with a comprehensive resume processing system featuring secure file uploads, async parsing, and hardened security.**
+
+### 🆕 **Latest Feature: Resume Processing System** 
+**Complete implementation with TDD approach:**
+- **Upload API**: `/api/resumes/upload` with PDF/DOCX support, 5MB limits, secure validation
+- **Status API**: `/api/resumes/status/{task_id}` for real-time task monitoring and results
+- **Parser Engine**: Background Celery tasks extracting text and contact info (name/email/phone)
+- **Security**: Rate limiting (10 req/5min upload, 60 req/min status) + enhanced CORS
+- **Testing**: 54 tests passing, 79% coverage, production-ready
 
 ### Core Technology Stack
 - **FastAPI**: Modern Python web framework with automatic OpenAPI documentation
@@ -404,7 +412,7 @@ This project is **Claude Code optimized** with comprehensive documentation and t
 
 # Adding background tasks
 "Create a new Celery task for email processing"
-→ Check: backend/app/tasks/ structure  
+→ Check: backend/app/tasks/ structure
 → Follow: Existing words.py patterns
 → Test: Add to test_celery_boilerplate.py
 

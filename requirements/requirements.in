@@ -7,3 +7,5 @@ jupyterlab
 pyjwt
 pydantic-settings
 passlib[bcrypt]
+python-docx
+PyPDF2

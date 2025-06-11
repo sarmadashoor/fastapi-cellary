@@ -19,6 +19,7 @@ from app.api.exception_handlers import (
 )
 from app.api.routing import TAGS, router
 from app.config import API_V1_STR
+from app.middleware.rate_limiting import rate_limit_middleware
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
@@ -40,17 +41,39 @@ app = FastAPI(
     },
 )
 
-# Add CORS middleware
+# Add CORS middleware with enhanced security for resume processing
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",
-        "https://yourdomain.com",
+        "http://localhost:3000",        # Local development
+        "http://localhost:8000",        # Local API testing
+        "https://yourdomain.com",       # Production domain
+        "https://app.yourdomain.com",   # Production app subdomain
     ],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Explicit method list
+    allow_headers=[
+        "Accept",
+        "Accept-Language",
+        "Content-Language",
+        "Content-Type",
+        "Authorization",
+        "X-Requested-With",
+        "X-RateLimit-Limit",
+        "X-RateLimit-Remaining",
+        "X-RateLimit-Reset",
+    ],
+    expose_headers=[
+        "X-RateLimit-Limit",
+        "X-RateLimit-Remaining", 
+        "X-RateLimit-Reset",
+        "Retry-After",
+    ],
+    max_age=86400,  # Cache preflight response for 24 hours
 )
+
+# Add rate limiting middleware
+app.middleware("http")(rate_limit_middleware)
 
 app.middleware("http")(unhandled_exception_middleware)
 app.include_router(router, prefix=API_V1_STR)

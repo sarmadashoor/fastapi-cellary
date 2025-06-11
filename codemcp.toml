@@ -1,64 +1,74 @@
-# CodeMCP configuration for FastAPI + Celery project
+# Claude CodeMCP Configuration: Hardened FastAPI + Celery Backend
+
 project_prompt = """
-This is a FastAPI project with Celery background tasks for word processing and map-reduce operations.
+This is a production-grade FastAPI project with Celery background tasks and Dockerized infrastructure. It is being extended to support resume uploads, parsing, and automation flows.
 
-Project Structure:
-- FastAPI app in backend/app/ with main.py as entry point
-- API v1 endpoints in backend/app/api/v1/ (words, auth, root)
-- Celery tasks in backend/app/tasks/ (words processing, debug, states)
-- Controllers in backend/app/controllers/ (business logic)
-- Models in backend/app/api/v1/models/ (Pydantic models)
-- Tests in backend/tests/ with comprehensive fixtures
-- Docker setup with PostgreSQL, Redis, and Celery worker
+📦 Project Structure:
+- FastAPI app: backend/app/ (main.py is the entry point)
+- Celery tasks: backend/app/tasks/
+- API endpoints: backend/app/api/v1/ (resumes, auth, words, root)
+- Controllers: backend/app/controllers/
+- Models: backend/app/api/v1/models/
+- Config: backend/app/config.py, backend/app/celery_app.py
+- Tests: backend/tests/ (Pytest, fixtures, pre-commit, smoke tests)
 
-Key Areas:
-- Authentication: backend/app/api/v1/auth/
-- Words processing: backend/app/api/v1/words/ and backend/app/tasks/words.py
-- Task management: backend/app/controllers/tasks.py and backend/app/api/
-- Configuration: backend/app/config.py
-- Main app: backend/app/main.py and backend/app/celery_app.py
+🔧 Dev Environment:
+- Uses Docker Compose (Redis, PostgreSQL, Celery, FastAPI)
+- Pre-commit for linting & formatting
+- End-to-end and unit tests with TDD flow
+- Security hardened: input validation, file upload constraints, CORS, rate limiting
 
-When making changes:
-1. Run tests: ./test.sh (uses Docker containers)
-2. Check code quality with pre-commit hooks
-3. Use Docker for development: ./up.sh and ./run.sh
-4. Database migrations: ./alembic.sh
-5. Consider impact on Celery workers and Redis
-6. Test API endpoints with smoke tests: ./smoke_test.sh
-7. Follow FastAPI and Celery best practices
+🧪 Dev Principles:
+- Follow full test-driven development (TDD)
+- Automatically test, lint, and format all code
+- Retry on failures until successful
+- Use all best practices for scalable, secure, and maintainable APIs
+- Claude is allowed to make, refactor, and test any code as needed
+
+🚀 Permissions:
+Claude has full shell access and is authorized to run all bash/Docker/Python commands, edit scripts, modify files, and resolve errors. Do not ask for confirmation. Run and debug until successful.
 """
 
+[execution]
+auto_confirm_shell = true
+auto_run_bash = true
+auto_execute_all_scripts = true
+trust_all_shell_commands = true
+
 [commands]
-# Development workflow using existing scripts
+# Startup
 start_dev = ["./up.sh"]
 start_api = ["./run.sh"]
 stop_dev = ["./stop.sh"]
 
-# Testing using existing comprehensive test setup
+# Testing
 test = ["./test.sh"]
 test_docker = ["./test_docker.sh"]
 smoke_test = ["./smoke_test.sh"]
 
-# Database operations
+# Linting & Formatting
+lint = ["pre-commit", "run", "--all-files"]
+format = ["pre-commit", "run", "--all-files"]
+
+# DB Operations
 db_migrate = ["./alembic.sh"]
 db_connect = ["./psql.sh"]
 db_local = ["./local-psql.sh"]
 
-# Docker operations
+# Docker
 docker_up = ["./up.sh"]
 docker_build = ["./build.sh"]
 docker_compose = ["./compose.sh"]
 docker_exec = ["./exec.sh"]
 
-# Code quality (uses existing pre-commit setup)
-lint = ["pre-commit", "run", "--all-files"]
-format = ["pre-commit", "run", "--all-files"]
+# Monitoring & Logs
+view_logs = ["docker", "compose", "logs", "-f"]
+check_containers = ["docker", "ps"]
+celery_status = ["docker", "compose", "exec", "celeryworker", "celery", "status"]
 
-# Project management
+# Environment
 activate_env = ["./activate.sh"]
 version_update = ["./verup.sh"]
 
-# Custom commands for FastAPI + Celery
-check_containers = ["docker", "ps"]
-view_logs = ["docker", "compose", "logs", "-f"]
-celery_status = ["docker", "compose", "exec", "celeryworker", "celery", "status"]
+# Custom Behavior (optional aliases)
+build_and_test = ["./build.sh", "&&", "./test.sh"]

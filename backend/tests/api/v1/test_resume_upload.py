@@ -6,11 +6,13 @@ This module tests the resume upload functionality with focus on:
 - File size limits (5MB maximum)
 - Proper error handling and status codes
 - Response schema validation
+- Celery task queueing
 """
 
 import io
 import tempfile
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 from fastapi import status
@@ -21,8 +23,13 @@ class TestResumeUpload:
 
     @pytest.mark.resume
     @pytest.mark.does_not_change_db
-    def test_upload_valid_pdf_file(self, client):
-        """Test uploading a valid PDF file under 5MB returns 200 OK with task_id."""
+    @patch('app.workers.resume_parser.parse_resume_task.delay')
+    def test_upload_valid_pdf_file(self, mock_celery_task, client):
+        """Test uploading a valid PDF file under 5MB returns 200 OK with task_id and queues Celery task."""
+        # Mock Celery task delay to return a task object with id
+        mock_task = type('MockTask', (), {'id': 'test-task-id-12345'})()
+        mock_celery_task.return_value = mock_task
+        
         # Create a small PDF-like file (simulated)
         pdf_content = b"%PDF-1.4\n1 0 obj\n<<\n/Type /Catalog\n/Pages 2 0 R\n>>\nendobj\n"
         pdf_content += b"x" * (1024 * 1024)  # 1MB file
@@ -47,12 +54,24 @@ class TestResumeUpload:
         response_data = response.json()
         assert "task_id" in response_data, "Response should contain task_id field"
         assert isinstance(response_data["task_id"], str), "task_id should be a string"
-        assert len(response_data["task_id"]) > 10, "task_id should be a meaningful identifier"
+        assert response_data["task_id"] == "test-task-id-12345", "task_id should match mocked task id"
+        
+        # Verify Celery task was called with correct arguments
+        mock_celery_task.assert_called_once()
+        call_args = mock_celery_task.call_args[0]
+        assert len(call_args) == 2, "Celery task should be called with file content and mime type"
+        assert call_args[0] == pdf_content, "First argument should be file content"
+        assert call_args[1] == "application/pdf", "Second argument should be MIME type"
 
     @pytest.mark.resume
     @pytest.mark.does_not_change_db
-    def test_upload_valid_docx_file(self, client):
-        """Test uploading a valid DOCX file under 5MB returns 200 OK with task_id."""
+    @patch('app.workers.resume_parser.parse_resume_task.delay')
+    def test_upload_valid_docx_file(self, mock_celery_task, client):
+        """Test uploading a valid DOCX file under 5MB returns 200 OK with task_id and queues Celery task."""
+        # Mock Celery task delay to return a task object with id
+        mock_task = type('MockTask', (), {'id': 'test-docx-task-67890'})()
+        mock_celery_task.return_value = mock_task
+        
         # Create a minimal DOCX-like file (simulated)
         docx_content = b"PK\x03\x04\x14\x00\x00\x00\x08\x00"  # ZIP signature for DOCX
         docx_content += b"x" * (2 * 1024 * 1024)  # 2MB file
@@ -68,7 +87,14 @@ class TestResumeUpload:
         response_data = response.json()
         assert "task_id" in response_data, "Response should contain task_id field"
         assert isinstance(response_data["task_id"], str), "task_id should be a string"
-        assert len(response_data["task_id"]) > 10, "task_id should be a meaningful identifier"
+        assert response_data["task_id"] == "test-docx-task-67890", "task_id should match mocked task id"
+        
+        # Verify Celery task was called with correct arguments
+        mock_celery_task.assert_called_once()
+        call_args = mock_celery_task.call_args[0]
+        assert len(call_args) == 2, "Celery task should be called with file content and mime type"
+        assert call_args[0] == docx_content, "First argument should be file content"
+        assert call_args[1] == "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "Second argument should be MIME type"
 
     @pytest.mark.resume
     @pytest.mark.does_not_change_db
